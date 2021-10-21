@@ -10,16 +10,15 @@ function recuperarCategorias(from) {
                 break;
             case "index":
                 dropdownCategoriasIndex(response.data);
+                renderCategorias(responde.data);
                 break;
         }
-
     });
 }
 
 
 
 function crearTablaCategorias(listaCategorias) {
-
     console.log("Entramos a crearTablaCategorias");
     let tabla = document.createElement('tbody');
     let categoria;
@@ -82,4 +81,8 @@ function dropdownCategoriasIndex(listaCategorias) {
         option.innerHTML = categoria.nombre;
         dropdownCategoriasIndex.appendChild(option);
     }
+}
+
+function renderCategorias(listaCategorias) {
+    
 }
