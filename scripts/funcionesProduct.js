@@ -2,12 +2,15 @@ function recuperarProduct(idProduct) {
     axios.get('../php/CrudProduct.php?btnForm=leerProduct&idProduct=' + idProduct).then((response) => { intercambiarBotonAgregar('Product', response.data) });
 }
 
-function recuperarProducts_Producto() {
-    axios.get('../php/CrudProduct.php?btnForm=leerProducts').then((response) => { renderProducts(response.data); });
+function recuperarProducts_Producto(filtro) {
+    console.log('../php/CrudProduct.php?btnForm=leerProducts&filtro='+filtro);
+    axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro='+filtro).then((response) => { 
+        console.log(response);
+        renderProducts(response.data); });
 }
 
 function recuperarProducts_Administrar() {
-    axios.get('../php/CrudProduct.php?btnForm=leerProducts').then((response) => { crearTablaProducts(response.data); });
+    axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro=null').then((response) => { crearTablaProducts(response.data); });
 }
 
 function renderProducts(productList) {
@@ -50,6 +53,7 @@ function renderProducts(productList) {
 
 function crearTablaProducts(listaProducts) {
     console.log("Entramos a crearTablaProducts");
+    console.log(listaProducts);
     let tabla = document.createElement('tbody');
     let categoria;
     let fila;

@@ -12,13 +12,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
-        <link href="../sass/custom.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="../style/page.css" type="text/css">
-        <script src="../scripts/funcionesCategoria.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script>
-            window.onload = recuperarCategorias("index");
-        </script>
+    <link href="../sass/custom.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="../style/page.css" type="text/css">
+    <script src="../scripts/funcionesCategoria.js"></script>
+    <script src="../scripts/funcionesIndex.js"></script>
+    <script src="../scripts/funcionesProduct.js"></script>
+    <script src="../scripts/funcionesGenerales.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        window.onload = recuperarCategorias("index");
+    </script>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -55,10 +58,8 @@
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouserIndex" data-bs-slide-to="0" class="active"
                 aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouserIndex" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouserIndex" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouserIndex" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouserIndex" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active contImgCarousel">
@@ -71,13 +72,11 @@
                 <img src="../imgs/MC-LATAM.png" class="d-block w-100" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouserIndex"
-            data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouserIndex" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouserIndex"
-            data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouserIndex" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -89,7 +88,10 @@
     <div class="container">
         <div class="row">
             <div class="row" id="renderCategorias">
-                <div class="col-6 mb-3 divCategoria" style="height: 100px">
+                <div class="col-6 mb-3 d-grid">
+                    <button type="button" value="Categoria" class="btn btn-primary bg-gradient" onclick="productsFiltro(0);"><h1>Categoria</h1></button>
+                </div>
+                <div class="col-6 mb-3 divCategoria">
                     <h1 class="bg-success bg-gradient h-100 rounded d-flex align-items-center justify-content-center categoriasIndex">CATEGORIA</h1>
                 </div>
             </div>
@@ -104,7 +106,7 @@
                 </a>
                 <span class="text-muted">Comercializadora y Distribuidora Torres Igor</span>
             </div>
-    
+
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                 <li class="ms-3"><a class="text-muted" href="#"><svg class="" width="24" height="24">
                             <use xlink:href="#twitter">

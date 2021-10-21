@@ -25,12 +25,12 @@ function confirmarEliminar(tipo, id) {
     let pregunta = "Seguro desea eliminar al " + tipo + ": " + id + " ?";
     let resp = confirm(pregunta);
     switch (tipo) {
-        case "cliente":
+        case "Cliente":
             if (resp) {
                 location.href = "../php/CrudCliente.php/?btnForm=eliminarCliente&idCliente=" + id;
             }
             break;
-        case "proveedor":
+        case "Proveedor":
             if (resp) {
                 location.href = "../php/CrudProveedor.php/?btnForm=eliminarProveedor&idProveedor=" + id;
             }

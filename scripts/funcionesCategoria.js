@@ -12,6 +12,9 @@ function recuperarCategorias(from) {
                 dropdownCategoriasIndex(response.data);
                 renderCategorias(response.data);
                 break;
+                case "products":
+                dropdownCategoriasIndex(response.data);
+                break;
         }
     });
 }
@@ -31,7 +34,7 @@ function crearTablaCategorias(listaCategorias) {
     select.setAttribute("class", "form-select");
     select.class = "form-select";
     select.ariaLabel = "labelSelect";
-    select.name = "categoriaProducto";
+    select.name = "categoriaProduct";
     option = document.createElement('option');
     option.innerHTML = "Seleccione una Categoria.";
     option.selected = true;
@@ -78,6 +81,7 @@ function dropdownCategoriasIndex(listaCategorias) {
         option = document.createElement('li');
         option.setAttribute("class", "dropdown-item");
         option.setAttribute("href", "#");
+        option.setAttribute("onclick", "recuperarProducts_Producto('"+ categoria.nombre +"')");
         option.innerHTML = categoria.nombre;
         dropdownCategoriasIndex.appendChild(option);
     }

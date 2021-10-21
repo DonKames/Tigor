@@ -34,6 +34,10 @@ if (isset($_GET['btnForm'])) {
             $cc->deleteCategoria(htmlspecialchars($_GET['idCategoria']));
             header('Location: ../../WebPages/administrar.html');
             break;
+        case "leerCategoriasFiltro":
+            header('Location: ../../WebPages/productos.html');
+            $cc->readCategorias($_GET["filtro"]);
+            break;
     }
 }
 

@@ -4,13 +4,13 @@ require_once 'BaseDatos.php';
 $cp = new CrudProduct;
 if (isset($_POST['btnForm'])) {
     $producto = new Producto;
-    $producto->codigo = $_POST["codigoProducto"];
-    $producto->nombre = $_POST["nombreProducto"];
-    $producto->categoria = $_POST["categoriaProducto"];
-    $producto->descripcion = $_POST["descripcionProducto"];
-    $producto->imagen = $_FILES["imgProducto"];
+    $producto->codigo = $_POST["codigoProduct"];
+    $producto->nombre = $_POST["nombreProduct"];
+    $producto->categoria = $_POST["categoriaProduct"];
+    $producto->descripcion = $_POST["descripcionProduct"];
+    $producto->imagen = $_FILES["imgProduct"];
     switch ($_POST["btnForm"]) {
-        case "agregarProducto":
+        case "agregarProduct":
             $cp->createProduct($producto);
             header('Location: ../WebPages/administrar.html');
             break;
@@ -22,7 +22,8 @@ if (isset($_POST['btnForm'])) {
 if (isset($_GET['btnForm'])) {
     switch ($_GET['btnForm']) {
         case "leerProducts":
-            $cp->readProducts();
+            
+            $cp->readProducts($_GET["filtro"]);
             break;
         case "leerProduct":
             $cp->readProduct(htmlspecialchars($_GET['idProduct']));
@@ -52,7 +53,7 @@ class CrudProduct
             move_uploaded_file($_FILES["imgProducto"]["tmp_name"], "../imgs/products/" . $producto->codigo);
             //move_uploaded_file($_FILES["imgProducto"]["tmp_name"],"E:/OneDrive - INACAP/xampp2/htdocs/Tigor/imgs/products/".$producto->codigo);            
             $query->execute($valores);
-            echo $_FILES["imgProducto"]["tmp_name"];
+            echo $_FILES["imgProduct"]["tmp_name"];
             echo "Producto Creado";
         } catch (PDOException $ex) {
             echo "Hubo un Error <br>";
@@ -80,25 +81,47 @@ class CrudProduct
         }
     }
 
-    function readProducts()
+    function readProducts($filtro)
     {
-        try {
-            $conexion = (new CrudProduct)->conexion;
-            $query = $conexion->prepare("SELECT * FROM productos;");
-            $query->execute();
-            $productList = [];
-            while ($resultado = $query->fetch()) {
-                $product = new Producto();
-                $product->codigo = $resultado['codigo'];
-                $product->nombre = $resultado['nombre'];
-                $product->categoria = $resultado['categoria'];
-                $product->descripcion = $resultado['descripcion'];
-                $productList[] = $product;
+        if($filtro !== "null") {
+            try {
+                
+                $conexion = (new CrudProduct)->conexion;
+                $query = $conexion->prepare("SELECT * FROM productos WHERE categoria = '".$filtro."';");
+                $query->execute();
+                $productList = [];
+                while ($resultado = $query->fetch()) {
+                    $product = new Producto();
+                    $product->codigo = $resultado['codigo'];
+                    $product->nombre = $resultado['nombre'];
+                    $product->categoria = $resultado['categoria'];
+                    $product->descripcion = $resultado['descripcion'];
+                    $productList[] = $product;
+                }
+                echo json_encode($productList);
+            } catch (PDOException $ex) {
+                echo $ex->getMessage();
             }
-            echo json_encode($productList);
-        } catch (PDOException $ex) {
-            echo $ex->getMessage();
+        }else{
+            try {
+                $conexion = (new CrudProduct)->conexion;
+                $query = $conexion->prepare("SELECT * FROM productos;");
+                $query->execute();
+                $productList = [];
+                while ($resultado = $query->fetch()) {
+                    $product = new Producto();
+                    $product->codigo = $resultado['codigo'];
+                    $product->nombre = $resultado['nombre'];
+                    $product->categoria = $resultado['categoria'];
+                    $product->descripcion = $resultado['descripcion'];
+                    $productList[] = $product;
+                }
+                echo json_encode($productList);
+            } catch (PDOException $ex) {
+                echo $ex->getMessage();
+            }
         }
+        
     }
 
     function updateProduct($product)

@@ -143,7 +143,7 @@
         public $nombre;
         public $categoria;
         public $descripcion;
-        public $imagen;
+        
         //public cantidad; ????? maybe
     }
 ?>
