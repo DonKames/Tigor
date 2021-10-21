@@ -10,7 +10,7 @@ function recuperarCategorias(from) {
                 break;
             case "index":
                 dropdownCategoriasIndex(response.data);
-                renderCategorias(responde.data);
+                renderCategorias(response.data);
                 break;
         }
     });
@@ -84,5 +84,18 @@ function dropdownCategoriasIndex(listaCategorias) {
 }
 
 function renderCategorias(listaCategorias) {
-    
+    let renderCategorias = document.getElementById("renderCategorias");
+    let divCategoria;
+    let nombreCategoria;
+    for(i= 0; i < listaCategorias.length; i++){
+        divCategoria = document.createElement("div");
+        nombreCategoria = document.createElement("h1");
+        categoria = listaCategorias[i];
+        divCategoria.setAttribute("class", "col-12 col-md-6 mb-5 divCategoria");
+        nombreCategoria.setAttribute("class", "bg-success bg-gradient h-100 rounded d-flex align-items-center justify-content-center categoriasIndex");
+        nombreCategoria
+        nombreCategoria.innerHTML = categoria.nombre;
+        divCategoria.appendChild(nombreCategoria);
+        renderCategorias.appendChild(divCategoria);
+    }
 }

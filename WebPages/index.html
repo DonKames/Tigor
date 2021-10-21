@@ -7,18 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CyD TIgor</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
-        <link href="../node_modules/scss/custom.scss" rel="stylesheet" type="text/css">
+        <link href="../sass/custom.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../style/page.css" type="text/css">
         <script src="../scripts/funcionesCategoria.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
             window.onload = recuperarCategorias("index");
         </script>
-        <link href="../style/page.css" rel="stylesheet">
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -84,29 +84,15 @@
     </div>
     <!--Body Categorias-->
     <div class="">
-        <h1 class="bg-dark text-light text-center">Categorias</h1>
+        <h1 class="bg-dark text-light text-center mb-5">Categorias</h1>
     </div>
     <div class="container">
         <div class="row">
-            
-            <div class="row">
-                <div class="col-6 mb-3">
-                    <a href=""><img class="img-fluid" src="https://via.placeholder.com/1000x200" alt=""></a>
-                </div>
-                <div class="col-6 mb-3">
-                    <a href=""><img class="img-fluid" src="https://via.placeholder.com/1000x200" alt=""></a>
+            <div class="row" id="renderCategorias">
+                <div class="col-6 mb-3 divCategoria" style="height: 100px">
+                    <h1 class="bg-success bg-gradient h-100 rounded d-flex align-items-center justify-content-center categoriasIndex">CATEGORIA</h1>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-6 mb-3">
-                    <a href=""><img class="img-fluid" src="https://via.placeholder.com/1000x200" alt=""></a>
-                </div>
-                <div class="col-6 mb-3">
-                    <a href=""><img class="img-fluid" src="https://via.placeholder.com/1000x200" alt=""></a>
-                </div>
-            </div>
-            <h1 class="text-center"></h1>
-
         </div>
     </div>
     <!--FOOTER-->
