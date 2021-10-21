@@ -1,0 +1,17 @@
+.contImgCarousel{
+    height: 400px;
+    overflow: hidden;
+    
+    position: relative;
+}
+
+.contImgCarousel > .imgCarousel {
+    position:absolute;
+    left: -100%;
+    right: -100%;
+    top: -200%;
+    bottom: -100%;
+    margin: auto;
+    min-height: 100%;
+    min-width: 100%;
+}
