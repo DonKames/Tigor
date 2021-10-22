@@ -146,4 +146,11 @@
         
         //public cantidad; ????? maybe
     }
-?>
+
+    class Contact{
+        public $id;
+        public $nombre;
+        public $email;
+        public $telefono;
+        public $mensaje;
+    }

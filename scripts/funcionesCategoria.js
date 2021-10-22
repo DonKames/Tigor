@@ -14,6 +14,7 @@ function recuperarCategorias(from) {
                 break;
                 case "products":
                 dropdownCategoriasIndex(response.data);
+                dropdownMenuCategorias(response.data);
                 break;
         }
     });
@@ -71,9 +72,9 @@ function crearTablaCategorias(listaCategorias) {
 
 }
 
-function dropdownCategoriasIndex(listaCategorias) {
+function dropdownMenuCategorias(listaCategorias){
     console.log(listaCategorias);
-    let dropdownCategoriasIndex = document.getElementById("dropdownCategoriasIndex");
+    let dropdownCategoriasIndex = document.getElementById("dropdownMenuCategorias");
     let option;
     let categoria;
     for (i = 0; i < listaCategorias.length; i++) {
@@ -84,6 +85,25 @@ function dropdownCategoriasIndex(listaCategorias) {
         option.setAttribute("onclick", "recuperarProducts_Producto('"+ categoria.nombre +"')");
         option.innerHTML = categoria.nombre;
         dropdownCategoriasIndex.appendChild(option);
+    }
+}
+
+function dropdownCategoriasIndex(listaCategorias) {
+    console.log(listaCategorias);
+    let dropdownCategoriasIndex = document.getElementById("dropdownCategoriasIndex");
+    let option;
+    let categoria;
+    let li;
+    for (i = 0; i < listaCategorias.length; i++) {
+        categoria = listaCategorias[i];
+        li = document.createElement("li")
+        option = document.createElement('a');
+        option.setAttribute("class", "dropdown-item");
+        option.setAttribute("href", "#");
+        option.setAttribute("onclick", "recuperarProducts_Producto('"+ categoria.nombre +"')");
+        option.innerHTML = categoria.nombre;
+        li.appendChild(option);
+        dropdownCategoriasIndex.appendChild(li);
     }
 }
 
