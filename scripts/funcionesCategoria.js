@@ -12,7 +12,7 @@ function recuperarCategorias(from) {
                 dropdownCategoriasIndex(response.data);
                 renderCategorias(response.data);
                 break;
-                case "products":
+            case "products":
                 dropdownCategoriasIndex(response.data);
                 dropdownMenuCategorias(response.data);
                 break;
@@ -72,7 +72,7 @@ function crearTablaCategorias(listaCategorias) {
 
 }
 
-function dropdownMenuCategorias(listaCategorias){
+function dropdownMenuCategorias(listaCategorias) {
     console.log(listaCategorias);
     let dropdownCategoriasIndex = document.getElementById("dropdownMenuCategorias");
     let option;
@@ -82,7 +82,7 @@ function dropdownMenuCategorias(listaCategorias){
         option = document.createElement('li');
         option.setAttribute("class", "dropdown-item");
         option.setAttribute("href", "#");
-        option.setAttribute("onclick", "recuperarProducts_Producto('"+ categoria.nombre +"')");
+        option.setAttribute("onclick", "recuperarProducts_Producto('" + categoria.nombre + "')");
         option.innerHTML = categoria.nombre;
         dropdownCategoriasIndex.appendChild(option);
     }
@@ -100,7 +100,7 @@ function dropdownCategoriasIndex(listaCategorias) {
         option = document.createElement('a');
         option.setAttribute("class", "dropdown-item");
         option.setAttribute("href", "#");
-        option.setAttribute("onclick", "recuperarProducts_Producto('"+ categoria.nombre +"')");
+        option.setAttribute("onclick", "recuperarProducts_Producto('" + categoria.nombre + "')");
         option.innerHTML = categoria.nombre;
         li.appendChild(option);
         dropdownCategoriasIndex.appendChild(li);
@@ -111,7 +111,7 @@ function renderCategorias(listaCategorias) {
     let renderCategorias = document.getElementById("renderCategorias");
     let divCategoria;
     let nombreCategoria;
-    for(i= 0; i < listaCategorias.length; i++){
+    for (i = 0; i < listaCategorias.length; i++) {
         divCategoria = document.createElement("div");
         nombreCategoria = document.createElement("h1");
         categoria = listaCategorias[i];

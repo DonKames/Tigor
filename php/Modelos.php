@@ -149,8 +149,8 @@
 
     class Contact{
         public $id;
-        public $nombre;
+        public $name;
         public $email;
-        public $telefono;
-        public $mensaje;
+        public $phone;
+        public $message;
     }

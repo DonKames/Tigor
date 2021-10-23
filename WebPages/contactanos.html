@@ -52,44 +52,40 @@
             <div class="row mb-5">
                 <div class="col-12 col-md-6 text-center mt-5 d-flex align-items-center justify-content-center">
                     <p class="h4 mt-3"><strong>Telefono<br>+569 7352 4463 <br> <br> Email<br>ventas@tigor.cl</strong></p>
-                    
                 </div>
                 <div class="col-12 col-md-6 mt-5">
                     <div class="card">
                         <div class="card-body">
-                            <form action="">
+                            <form action="../php/CrudContact.php" method="post">
                                 <div class="form-floating mb-3 col-12">
-                                    <input type="text" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com">
-                                    <label for="floatingInput">Nombre / Compañia</label>
+                                    <input type="text" class="form-control" id="floatingName" name="nameContact"
+                                        placeholder="Empresa Ficticia">
+                                    <label for="floatingName">Nombre / Compañia</label>
                                 </div>
                                 <div class="form-floating mb-3 col-12">
-                                    <input type="email" class="form-control" id="floatingInput"
+                                    <input type="email" class="form-control" id="floatingEmail" name="emailContact"
                                         placeholder="name@example.com">
-                                    <label for="floatingInput">Email</label>
+                                    <label for="floatingEmail">Email</label>
                                 </div>
                                 <div class="form-floating mb-3 col-12">
-                                    <input type="tel" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com">
-                                    <label for="floatingInput">Telefono / Celular</label>
+                                    <input type="tel" class="form-control" id="floatingPhone" name="phoneContact"
+                                        placeholder="912346578">
+                                    <label for="floatingPhone">Telefono / Celular</label>
                                 </div>
                                 <div class="form-floating mb-3 col-12">
-                                    <textarea class="form-control" placeholder="Leave a comment here"
-                                        id="floatingTextarea" style="height: 100px"></textarea>
-                                    <label for="floatingTextarea">Mensaje</label>
+                                    <textarea class="form-control" placeholder="Leave a comment here" name="messageContact"
+                                        id="floatingMessageContact" style="height: 30%"></textarea>
+                                    <label for="floatingMessageContact">Mensaje</label>
                                 </div>
                                 <div class="form-floating mb-3  ps-5 pe-5 col-12">
                                     <div class="row">
-                                        <button type="submit" class="btn btn-primary">
+                                        <button type="submit" class="btn btn-primary" name="btnForm" value="addContact">
                                             Enviar
                                         </button>
                                     </div>
-                                    
                                 </div>
                             </form>
                         </div>
-
-
                     </div>
                 </div>
             </div>
