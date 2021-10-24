@@ -4,17 +4,25 @@ require_once 'BaseDatos.php';
 $cc = new CrudCategoria;
 
 if (isset($_POST['btnForm'])) {
+    
     $categoria = new Categoria;
-    $categoria->id = $_POST['idCategoria'];
     $categoria->nombre = $_POST['nombreCategoria'];
 
     switch ($_POST['btnForm']) {
         case "agregarCategoria":
             echo "Entro Switch agregarCategoria";
-            $cc->createCategoria($categoria);
-            echo "CHAO";
-            header('Location: ../WebPages/administrar.html');
-            break;
+            $errors = [];
+            $is_valid = GUMP::is_valid($_POST, [
+                'nombreCategoria' => 'required|max_len,30|min_len,2|alpha_space'
+            ]);
+            if($is_valid === true) {
+                $cc->createCategoria($categoria);
+                header("Location: ../WebPages/administrar.html");
+            } else {
+                $errors = $is_valid;
+                echo json_encode($errors);
+            }
+            
         case "modificarCategoria":
             $cc->updateCategoria($categoria);
             header('Location: ../WebPages/administrar.html');

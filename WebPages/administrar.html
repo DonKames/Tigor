@@ -504,6 +504,73 @@
           <div class="tab-pane fade" id="cotizacionesConte" role="tabpanel" aria-labelledby="tabCotizaciones">
             <strong>Cotizaciones</strong>
           </div>
+
+          <!--Accordion Contacto-->
+          <div class="tab-pane fade" id="ContactoConte" role="tabpanel" aria-labelledby="tabContacto">
+            <div class="accordion" id="accordionContacto">
+              <!--Accordion opcion 1 Mostrar Categoria-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headerMostrarCategoria">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarContacto" aria-expanded="false" aria-controls="collapseMostrarContacto" id="btnAccordionMostrarContacto"><strong>Mostrar Categoria</strong></button>
+                </h2>
+                <div id="collapseMostrarContacto" class="accordion-collapse collapse" aria-labelledby="headerMostrarCategoria" data-bs-parent="#accordionContacto">
+                  <div class="accordion-body">
+                    <div class="table-responsive">
+                      <table class="table table-striped placeholder-glow">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody id="cuerpoTablaMostrarContacto">
+                          <tr>
+                            <th scope="row" class="placeholder">1</th>
+                            <td class="placeholder">Cargando su TABLA</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Accordion opcion 2 Agregar Categoria-->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headerAgregarCategoria">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAgregarCategoria" aria-expanded="true" aria-controls="collapseAgregarCategoria" id="btnAccordionAgregarCategoria"><strong>Agregar Categoria</strong></button>
+                </h2>
+                <div id="collapseAgregarCategoria" class="accordion-collapse collapse show" aria-labelledby="headerMostrarCategoria" data-bs-parent="#accordionContacto">
+                  <div class="accordion-body">
+                    <form action="../php/CrudCategoria.php" method="post">
+                      <div class="row">
+                        <div class="form-floating col-12 col-md-6 mb-3" hidden>
+                          <input type="text" class="form-control" id="floatIdCategoria" placeholder="idCategoria" name="idCategoria">
+                          <label for="floatIdCategoria" class="ms-3">Id</label>
+                        </div>
+                        <div class="form-floating col-12 col-md-6 mb-3">
+                          <input type="text" class="form-control" id="floatNombreCategoria" placeholder="nombreCategoria" name="nombreCategoria">
+                          <label for="floatNombreCategoria" class="ms-3">Nombre</label>
+                        </div>
+                        <div class="d-flex justify-content-end col-12 col-md-6 mb-3">
+                          <button type="submit" class="btn btn-primary btn-lg flex-md-fill" name="btnForm" value="agregarCategoria" id="btnAgregarCategoria">
+                            Agregar Categoria
+                          </button>
+                          <button type="reset" class="btn btn-danger btn-lg me-5" id="btnResetCategoria" onclick="resetCliente('Categoria')" hidden>
+                            Cancelar
+                          </button>
+                          <button type="submit" class="btn btn-primary btn-lg" name="btnForm" value="modificarCategoria" id="btnModificarCategoria" onclick="" hidden>
+                            Modificar Cliente
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
