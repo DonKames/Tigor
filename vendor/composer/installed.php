@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'a40740334189eb85943f9d043a3e6d5164c9cc00',
+        'reference' => '4a80377a06295bb9c4a1c75f71507f0683c0f9a5',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'a40740334189eb85943f9d043a3e6d5164c9cc00',
+            'reference' => '4a80377a06295bb9c4a1c75f71507f0683c0f9a5',
             'dev_requirement' => false,
         ),
         'wixel/gump' => array(

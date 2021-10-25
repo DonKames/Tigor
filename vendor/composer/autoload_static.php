@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2e1645fe09896ce4ca426f50d8a9813e
+class ComposerStaticInit13a00210095e270860ba75f4638d7bf2
 {
     public static $files = array (
         'da253f61703e9c22a5a34f228526f05a' => __DIR__ . '/..' . '/wixel/gump/gump.class.php',
@@ -31,9 +31,9 @@ class ComposerStaticInit2e1645fe09896ce4ca426f50d8a9813e
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2e1645fe09896ce4ca426f50d8a9813e::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2e1645fe09896ce4ca426f50d8a9813e::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit2e1645fe09896ce4ca426f50d8a9813e::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit13a00210095e270860ba75f4638d7bf2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit13a00210095e270860ba75f4638d7bf2::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit13a00210095e270860ba75f4638d7bf2::$classMap;
 
         }, null, ClassLoader::class);
     }
