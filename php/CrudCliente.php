@@ -4,7 +4,7 @@ require_once 'BaseDatos.php';
 $cc = new CrudCliente;
 if (isset($_POST['btnForm'])) {
     require_once 'GUMPController.php';
-    require_once '../vendor/autoload.php';
+    
     $cliente = new Cliente;
     $cliente->setRut($_POST['rutCliente']);
     $cliente->setNombre($_POST['nombreCliente']);

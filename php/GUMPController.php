@@ -1,6 +1,7 @@
 <?php
 function GUMPController()
 {
+    require_once '../vendor/autoload.php';
     $gump = new GUMP();
     switch ($_POST['btnForm']) {
         case "agregarCliente":
@@ -57,6 +58,7 @@ function GUMPController()
                 return $valid_data;
             }
             break;
+            
         case "agregarProveedor":
             $gump->validation_rules([
                 'rutProveedor' => 'required|numeric|between_len,8;15',
@@ -110,6 +112,7 @@ function GUMPController()
                 return $valid_data;
             }
             break;
+
         case "agregarCategoria":
             $gump->validation_rules([
                 'nombreCategoria' => 'required|alpha_numeric_space|between_len,3;50'
@@ -122,6 +125,99 @@ function GUMPController()
                     'between_len' => 'El nombre debe tener entre 3 y 50 caracteres'
                 ]
             ]);
+
+            $valid_data = $gump->run($_POST);
+            if ($gump->errors()) {
+                echo json_encode($gump->get_readable_errors());
+                return $valid_data;
+            } else {
+                echo json_encode($gump);
+                echo json_encode($valid_data);
+                return $valid_data;
+            }
+            break;
+            
+        case "agregarProduct":
+            $gump->validation_rules([
+                'codigoProduct' => 'required|alpha_numeric_dash|between_len,2;20',
+                'nombreProduct' => 'required|alpha_numeric_space|between_len,3;50',
+                'categoriaProduct' => 'required|alpha_numeric_space|between_len,3;30',
+                'descripcionProduct' => 'required|alpha_numeric_space|between_len,3;1000'
+            ]);
+
+            $gump->set_fields_error_messages([
+                'codigoProduct' => [
+                    'required' => 'El codigo es requerido',
+                    'alpha_numeric_dash' => 'El codigo debe contener solo letras, numeros y guiones',
+                    'between_len' => 'El codigo debe tener entre 2 y 20 caracteres'
+                ],
+                'nombreProduct' => [
+                    'required' => 'El nombre es requerido',
+                    'alpha_numeric_space' => 'El nombre debe contener solo letras y numeros',
+                    'between_len' => 'El nombre debe tener entre 3 y 50 caracteres'
+                ],
+                'categoriaProduct' => [
+                    'required' => 'La categoria es requerida',
+                    'alpha_numeric_space' => 'La categoria debe contener solo letras y numeros',
+                    'between_len' => 'La categoria debe tener entre 3 y 30 caracteres'
+                ],
+                'descripcionProduct' => [
+                    'required' => 'La descripcion es requerida',
+                    'alpha_numeric_space' => 'La descripcion debe contener solo letras y numeros',
+                    'between_len' => 'La descripcion debe tener entre 3 y 1000 caracteres'
+                ]
+            ]);
+
+            $valid_data = $gump->run($_POST);
+            if ($gump->errors()) {
+                echo json_encode($gump->get_readable_errors());
+                return $valid_data;
+            } else {
+                echo json_encode($gump);
+                echo json_encode($valid_data);
+                return $valid_data;
+            }
+            break;
+
+        case "addContact":
+            $gump->validation_rules([
+                'nameContact' => 'required|alpha_numeric_space|between_len,3;50',
+                'emailContact' => 'required|valid_email|between_len,5;50',
+                'phoneContact' => 'required|numeric|between_len,8;12',
+                'messageContact' => 'required|alpha_numeric_space|between_len,3;5000'
+            ]);
+
+            $gump->set_fields_error_messages([
+                'nameContact' => [
+                    'required' => 'El nombre es requerido',
+                    'alpha_numeric_space' => 'El nombre debe contener solo letras y numeros',
+                    'between_len' => 'El nombre debe tener entre 3 y 50 caracteres'
+                ],
+                'emailContact' => [
+                    'required' => 'El email es requerido',
+                    'valid_email' => 'El email debe ser valido',
+                    'between_len' => 'El email debe tener entre 5 y 50 caracteres'
+                ],
+                'phoneContact' => [
+                    'required' => 'El telefono es requerido',
+                    'numeric' => 'El telefono debe ser numerico',
+                    'between_len' => 'El telefono debe tener entre 8 y 12 caracteres'
+                ],
+                'messageContact' => [
+                    'required' => 'El mensaje es requerido',
+                    'alpha_numeric_space' => 'El mensaje debe contener solo letras y numeros',
+                    'between_len' => 'El mensaje debe tener entre 3 y 5000 caracteres'
+                ]
+            ]);
+            $valid_data = $gump->run($_POST);
+            if ($gump->errors()) {
+                echo json_encode($gump->get_readable_errors());
+                return $valid_data;
+            } else {
+                echo json_encode($gump);
+                echo json_encode($valid_data);
+                return $valid_data;
+            }
             break;
     }
 }
