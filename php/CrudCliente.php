@@ -3,6 +3,8 @@ require_once 'Modelos.php';
 require_once 'BaseDatos.php';
 $cc = new CrudCliente;
 if (isset($_POST['btnForm'])) {
+    require_once 'GUMPController.php';
+    require_once '../vendor/autoload.php';
     $cliente = new Cliente;
     $cliente->setRut($_POST['rutCliente']);
     $cliente->setNombre($_POST['nombreCliente']);
@@ -13,9 +15,15 @@ if (isset($_POST['btnForm'])) {
     switch ($_POST['btnForm']) {
         case "agregarCliente":
             echo "Entro Switch agregarCliente";
-            $cc->createCliente($cliente);
-            echo "CHAO";
-            header('Location: ../WebPages/administrar.html');
+            $is_valid = GUMPController();
+            echo ' resultado de is_valid '.json_encode($is_valid);
+            if ($is_valid === false) {
+                echo 'Failed';
+            }else{
+                $cc->createCliente($cliente);
+                echo "Success";
+                header('Location: ../WebPages/administrar.html');
+            }
             break;
         case "modificarCliente":
             $cc->updateCliente($cliente);
