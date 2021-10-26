@@ -13,7 +13,6 @@ if (isset($_POST['btnForm'])) {
     switch ($_POST['btnForm']) {
         case "addContact":
             $is_valid = GUMPController();
-            
             if($is_valid === true) {
                 $cc->createContact($contact);
             }
@@ -41,7 +40,7 @@ class CrudContact
             $conexion = (new CrudContact)->conexion;
             $query = $conexion->prepare("INSERT INTO contacts VALUES (null, :nombre, :email, :telefono, :mensaje);");
             $valores = ['nombre' => $contact->name, 'email' => $contact->email, 'telefono' => $contact->phone, 'mensaje' => $contact->message];
-            $result = $query->execute($valores);
+            $query->execute($valores);
             
             //header('Location: ../WebPages/confirmacionContacto.html');
             //echo json_encode($result);

@@ -121,3 +121,22 @@ function renderCategorias(listaCategorias) {
         renderCategorias.appendChild(divCategoria);
     }
 }
+
+function postCategoria(){
+    let params = new URLSearchParams();
+    let nombre = document.getElementById("floatNombreCategoria").value;
+    params.append("btnForm", "agregarCategoria");
+    params.append("nombreCategoria", nombre);
+    axios.post('../php/CrudCategoria.php', params)
+        .then((response) => {
+            console.log(response);
+            if (response.data[0] == "failed") {
+                alert(response.data[1][0]);
+            } else {
+                alert('Categoria Agregada con Exito');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}

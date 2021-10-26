@@ -17,10 +17,10 @@
   <script src="../scripts/funcionesProduct.js"></script>
   
   <script>
-    window.onload = recuperarClientes();
-    window.onload = recuperarProveedores();
-    window.onload = recuperarCategorias("administrar");
-    window.onload = recuperarProducts_Administrar();
+    //window.onload = recuperarClientes();
+    //window.onload = recuperarProveedores();
+    //window.onload = recuperarCategorias("administrar");
+    //window.onload = recuperarProducts_Administrar();
   </script>
 </head>
 
@@ -137,7 +137,7 @@
                       </div>
                       <div class="row">
                         <div class="d-flex justify-content-end">
-                          <button type="submit" class="btn btn-primary btn-lg" name="btnForm" value="agregarCliente" id="btnAgregarCliente">
+                          <button type="button" class="btn btn-primary btn-lg" name="btnForm" value="agregarCliente" id="btnAgregarCliente" onclick="postClient()">
                             Agregar Cliente
                           </button>
                           <button type="reset" class="btn btn-danger btn-lg me-5" id="btnResetCliente" onclick="resetCliente('Cliente')" hidden>
@@ -155,7 +155,7 @@
               <!--Accordion opcion 2 Mostrar Clientes-->
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headerMostrarClientes">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarClientes" aria-expanded="false" aria-controls="collapseMostrarClientes" id="btnAccordionMostrarClientes"><strong>Mostrar Clientes</strong></button>
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarClientes" aria-expanded="false" aria-controls="collapseMostrarClientes" id="btnAccordionMostrarClientes" onclick="recuperarClientes()"><strong>Mostrar Clientes</strong></button>
                 </h2>
                 <div id="collapseMostrarClientes" class="accordion-collapse collapse" aria-labelledby="headerMostrarClientes" data-bs-parent="#accordionClientes">
                   <div class="accordion-body">
@@ -254,7 +254,7 @@
                       </div>
                       <div class="row">
                         <div class="d-flex justify-content-end">
-                          <button type="submit" class="btn btn-primary btn-lg" name="btnForm" value="agregarProveedor" id="btnAgregarProveedor">
+                          <button type="button" class="btn btn-primary btn-lg" name="btnForm" value="agregarProveedor" id="btnAgregarProveedor" onclick="postProveedor()">
                             Agregar Cliente
                           </button>
                           <button type="reset" class="btn btn-danger btn-lg me-5" id="btnResetProveedor" onclick="resetCliente('Proveedor')" hidden>
@@ -272,7 +272,7 @@
               <!--Accordion opcion 2 Mostrar Proveedores-->
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headerMostrarProveedores">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarProveedors" aria-expanded="false" aria-controls="collapseMostrarProveedors" id="btnAccordionMostrarProveedors"><strong>Mostrar Proveedores</strong></button>
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarProveedors" aria-expanded="false" aria-controls="collapseMostrarProveedors" id="btnAccordionMostrarProveedors" onclick="recuperarProveedores()"><strong>Mostrar Proveedores</strong></button>
                 </h2>
                 <div id="collapseMostrarProveedors" class="accordion-collapse collapse" aria-labelledby="headerMostrarProveedores" data-bs-parent="#accordionProveedores">
                   <div class="accordion-body">
@@ -340,7 +340,7 @@
                           <label for="floatNombreCategoria" class="ms-3">Nombre</label>
                         </div>
                         <div class="d-flex justify-content-end col-12 col-md-6 mb-3">
-                          <button type="submit" class="btn btn-primary btn-lg flex-md-fill" name="btnForm" value="agregarCategoria" id="btnAgregarCategoria">
+                          <button type="button" class="btn btn-primary btn-lg flex-md-fill" name="btnForm" value="agregarCategoria" id="btnAgregarCategoria" onclick="postCategoria()">
                             Agregar Categoria
                           </button>
                           <button type="reset" class="btn btn-danger btn-lg me-5" id="btnResetCategoria" onclick="resetCliente('Categoria')" hidden>
@@ -358,7 +358,7 @@
               <!--Accordion opcion 2 Mostrar Categoria-->
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headerMostrarCategoria">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarCategorias" aria-expanded="false" aria-controls="collapseMostrarCategorias" id="btnAccordionMostrarCategorias"><strong>Mostrar Categoria</strong></button>
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarCategorias" aria-expanded="false" aria-controls="collapseMostrarCategorias" id="btnAccordionMostrarCategorias" onclick="recuperarCategorias('administrar')"><strong>Mostrar Categoria</strong></button>
                 </h2>
                 <div id="collapseMostrarCategorias" class="accordion-collapse collapse" aria-labelledby="headerMostrarCategoria" data-bs-parent="#accordionCategorias">
                   <div class="accordion-body">
@@ -450,7 +450,7 @@
               <!--Accordion opcion 2 Mostrar Productos-->
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headerMostrarProducts">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarProducts" aria-expanded="false" aria-controls="collapseMostrarProducts" id="btnAccordionMostrarProducts"><strong>Mostrar Productos</strong></button>
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMostrarProducts" aria-expanded="false" aria-controls="collapseMostrarProducts" id="btnAccordionMostrarProducts" onclick="recuperarProducts_Administrar()"><strong>Mostrar Productos</strong></button>
                 </h2>
                 <div id="collapseMostrarProducts" class="accordion-collapse collapse" aria-labelledby="headerMostrarProducts" data-bs-parent="#accordionProducts">
                   <div class="accordion-body">

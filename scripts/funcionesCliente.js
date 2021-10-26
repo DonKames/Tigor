@@ -53,3 +53,32 @@ function recuperarClientes() {
 function recuperarCliente(idCliente) {
     axios.get('../php/CrudCliente.php?btnForm=leerCliente&idCliente=' + idCliente).then((response) => { intercambiarBotonAgregar('Cliente', response.data) });
 }
+
+function postClient() {
+    let params = new URLSearchParams();
+    let rut = document.getElementById('floatRutCliente').value;
+    let nombre = document.getElementById('floatNombreCliente').value;
+    let direccion = document.getElementById('floatDireccionCliente').value;
+    let comuna = document.getElementById('floatSelectComunaCliente').value;
+    let email = document.getElementById('floatEmailCliente').value;
+    let telefono = document.getElementById('floatTelefonoCliente').value;
+    params.append('btnForm', 'agregarCliente');
+    params.append('rutCliente', rut);
+    params.append('nombreCliente', nombre);
+    params.append('direccionCliente', direccion);
+    params.append('comunaCliente', comuna);
+    params.append('emailCliente', email);
+    params.append('telefonoCliente', telefono);
+    axios.post('../php/CrudCliente.php', params)
+        .then((response) => {
+            console.log(response);
+            if (response.data[0] == 'failed') {
+                alert(response.data[1][0])
+            } else {
+                alert('Cliente Agregado con Exito');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}

@@ -86,3 +86,16 @@ function crearTablaProducts(listaProducts) {
     }
     actualizarElemento(tabla.codigo, tabla);
 }
+
+function postProduct(){
+    let params = new URLSearchParams();
+    let codigo = document.getElementById('floatCodigoProduct').value;
+    let nombre = document.getElementById('floatNombreProduct').value;
+    let categoria = document.getElementById('floatSelectCategoriaProduct').value;
+    let descripcion = document.getElementById('floatDescripcionProduct').value;
+    params.append('btnForm', 'agregarProduct');
+    params.append('codigoProduct', codigo);
+    params.append('nombreProduct', nombre);
+    params.append('categoriaProduct', categoria);
+    params.append('descripcionProduct', descripcion);
+}

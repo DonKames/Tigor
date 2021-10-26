@@ -4,27 +4,17 @@ require_once 'BaseDatos.php';
 $cc = new CrudCategoria;
 
 if (isset($_POST['btnForm'])) {
-    require_once '../vendor/autoload.php';
+    require_once 'GUMPController.php';
     $categoria = new Categoria;
     $categoria->nombre = $_POST['nombreCategoria'];
 
     switch ($_POST['btnForm']) {
         case "agregarCategoria":
-            echo "Entro Switch agregarCategoria";
-            $errors = [];
-            $is_valid = GUMP::is_valid($_POST, [
-                'nombreCategoria' => ['required', 'alpha_numeric_space', 'between_len' => [2, 30]]//'required|max_len,30|min_len,2|alpha_numeric_space'
-            ], [
-                'nombreCategoria' => ['required' => 'Rellene el campo Nombre de la Categoria.'],
-                'nombreCategoria' => ['alpha_numeric_space' => 'El campo Nombre de la Categoria debe contener solo letras y numeros.']
-            ]);
-            if($is_valid === true) {
+            $is_valid = GUMPController();
+            if ($is_valid === true) {
                 $cc->createCategoria($categoria);
-                header("Location: ../WebPages/administrar.html");
-            } else {
-                $errors = $is_valid;
-                echo json_encode($errors);
             }
+            break;
             
         case "modificarCategoria":
             $cc->updateCategoria($categoria);

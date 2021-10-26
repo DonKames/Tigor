@@ -1,4 +1,4 @@
-function PostContact() {
+function postContact() {
     let name = document.getElementById("contactName").value;
     let email = document.getElementById("contactEmail").value;
     let phone = document.getElementById("contactPhone").value;

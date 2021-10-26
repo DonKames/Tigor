@@ -14,15 +14,9 @@ if (isset($_POST['btnForm'])) {
     $cliente->setTelefono($_POST['telefonoCliente']);
     switch ($_POST['btnForm']) {
         case "agregarCliente":
-            echo "Entro Switch agregarCliente";
             $is_valid = GUMPController();
-            echo ' resultado de is_valid '.json_encode($is_valid);
-            if ($is_valid === false) {
-                echo 'Failed';
-            }else{
+            if ($is_valid === true) {
                 $cc->createCliente($cliente);
-                echo "Success";
-                header('Location: ../WebPages/administrar.html');
             }
             break;
         case "modificarCliente":
@@ -64,7 +58,6 @@ class CrudCliente
             $query = $conexion->prepare("INSERT INTO clientes VALUES (:rut, :nombre, :direccion, :comuna, :email, :telefono);");
             $valores = ['rut' => $cliente->getRut(), 'nombre' => $cliente->getNombre(), 'direccion' => $cliente->getDireccion(), 'comuna' => $cliente->getComuna(), 'email' => $cliente->getEmail(), 'telefono' => $cliente->getTelefono()];
             $query->execute($valores);
-            echo "Cliente Creado";
         } catch (PDOException $ex) {
             echo "Hubo un Error <br>";
             echo $ex;

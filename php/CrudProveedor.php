@@ -2,8 +2,8 @@
 require_once 'Modelos.php';
 require_once 'BaseDatos.php';
 $cp = new CrudProveedor;
-
 if (isset($_POST['btnForm'])) {
+    require_once 'GUMPController.php';
     $proveedor = new Proveedor;
     $proveedor->setRut($_POST['rutProveedor']);
     $proveedor->setNombre($_POST['nombreProveedor']);
@@ -13,9 +13,10 @@ if (isset($_POST['btnForm'])) {
     $proveedor->setTelefono($_POST['telefonoProveedor']);
     switch ($_POST['btnForm']) {
         case "agregarProveedor":
-            echo "Entro Switch agregarProveedor";
-            $cp->createProveedor($proveedor);
-            header('Location: ../WebPages/administrar.html');
+            $is_valid = GUMPController();
+            if ($is_valid === true) {
+                $cp->createProveedor($proveedor);
+            }
             break;
         case "modificarProveedor":
             $cp->updateProveedor($proveedor);

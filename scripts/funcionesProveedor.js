@@ -44,11 +44,39 @@ function crearTablaProveedores(listaProveedores) {
     actualizarElemento(tabla.id, tabla);
 }
 
-
-function recuperarProveedores(){
-    axios.get('../php/CrudProveedor.php?btnForm=leerProveedores').then((response) => {crearTablaProveedores(response.data);});
+function recuperarProveedores() {
+    axios.get('../php/CrudProveedor.php?btnForm=leerProveedores').then((response) => { crearTablaProveedores(response.data); });
 }
 
 function recuperarProveedor(idProveedor) {
-    axios.get('../php/CrudProveedor.php?btnForm=leerProveedor&idProveedor=' + idProveedor).then((response) => {intercambiarBotonAgregar('Proveedor', response.data)});
+    axios.get('../php/CrudProveedor.php?btnForm=leerProveedor&idProveedor=' + idProveedor).then((response) => { intercambiarBotonAgregar('Proveedor', response.data) });
+}
+
+function postProveedor() {
+    let params = new URLSearchParams();
+    let rut = document.getElementById('floatRutProveedor').value;
+    let nombre = document.getElementById('floatNombreProveedor').value;
+    let direccion = document.getElementById('floatDireccionProveedor').value;
+    let comuna = document.getElementById('floatSelectComunaProveedor').value;
+    let email = document.getElementById('floatEmailProveedor').value;
+    let telefono = document.getElementById('floatTelefonoProveedor').value;
+    params.append('btnForm', 'agregarProveedor');
+    params.append('rutProveedor', rut);
+    params.append('nombreProveedor', nombre);
+    params.append('direccionProveedor', direccion);
+    params.append('comunaProveedor', comuna);
+    params.append('emailProveedor', email);
+    params.append('telefonoProveedor', telefono);
+    axios.post('../php/CrudProveedor.php', params)
+        .then((response) => {
+            console.log(response);
+            if (response.data[0] == "failed") {
+                alert(response.data[1][0]);
+            } else {
+                alert('Proveedor Agregado con Exito');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }

@@ -48,15 +48,18 @@ function GUMPController()
                 ]
             ]);
 
-            $valid_data = $gump->run($_POST);
+            $is_valid = $gump->run($_POST);
+            $response = new ArrayObject();
             if ($gump->errors()) {
-                echo json_encode($gump->errors()) . 'final errors';
-                echo json_encode($gump->get_readable_errors());
-                return $valid_data;
+                $response->append("failed");
+                $errors = $gump->get_readable_errors();
+                $response->append($errors);
+                echo json_encode($response);
+                return $is_valid;
             } else {
-                echo json_encode($gump);
-                echo json_encode($valid_data);
-                return $valid_data;
+                $response->append("success");
+                echo json_encode($response);
+                return true;
             }
             break;
 
@@ -103,14 +106,18 @@ function GUMPController()
                 ]
             ]);
 
-            $valid_data = $gump->run($_POST);
+            $is_valid = $gump->run($_POST);
+            $response = new ArrayObject();
             if ($gump->errors()) {
-                echo json_encode($gump->get_readable_errors());
-                return $valid_data;
+                $response->append("failed");
+                $errors = $gump->get_readable_errors();
+                $response->append($errors);
+                echo json_encode($response);
+                return $is_valid;
             } else {
-                echo json_encode($gump);
-                echo json_encode($valid_data);
-                return $valid_data;
+                $response->append("success");
+                echo json_encode($response);
+                return true;
             }
             break;
 
@@ -127,14 +134,18 @@ function GUMPController()
                 ]
             ]);
 
-            $valid_data = $gump->run($_POST);
+            $is_valid = $gump->run($_POST);
+            $response = new ArrayObject();
             if ($gump->errors()) {
-                echo json_encode($gump->get_readable_errors());
-                return $valid_data;
+                $response->append("failed");
+                $errors = $gump->get_readable_errors();
+                $response->append($errors);
+                echo json_encode($response);
+                return $is_valid;
             } else {
-                echo json_encode($gump);
-                echo json_encode($valid_data);
-                return $valid_data;
+                $response->append("success");
+                echo json_encode($response);
+                return true;
             }
             break;
             
@@ -169,14 +180,18 @@ function GUMPController()
                 ]
             ]);
 
-            $valid_data = $gump->run($_POST);
+            $is_valid = $gump->run($_POST);
+            $response = new ArrayObject();
             if ($gump->errors()) {
-                echo json_encode($gump->get_readable_errors());
-                return $valid_data;
+                $response->append("failed");
+                $errors = $gump->get_readable_errors();
+                $response->append($errors);
+                echo json_encode($response);
+                return $is_valid;
             } else {
-                echo json_encode($gump);
-                echo json_encode($valid_data);
-                return $valid_data;
+                $response->append("success");
+                echo json_encode($response);
+                return true;
             }
             break;
 
@@ -185,7 +200,7 @@ function GUMPController()
                 'contactName' => 'required|alpha_numeric_space|between_len,3;50',
                 'contactEmail' => 'required|valid_email|between_len,5;50',
                 'contactPhone' => 'required|numeric|between_len,8;12',
-                'contactMessage' => 'alpha_numeric_space|between_len,3;5000'
+                'contactMessage' => 'required|alpha_numeric_space|between_len,3;5000'
             ]);
 
             $gump->set_fields_error_messages([
