@@ -20,8 +20,6 @@ function recuperarCategorias(from) {
     });
 }
 
-
-
 function crearTablaCategorias(listaCategorias) {
     console.log("Entramos a crearTablaCategorias");
     let tabla = document.createElement('tbody');

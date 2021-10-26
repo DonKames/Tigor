@@ -3,18 +3,28 @@ require_once 'Modelos.php';
 require_once 'BaseDatos.php';
 $cc = new CrudContact;
 if (isset($_POST['btnForm'])) {
+    require_once 'GUMPController.php';
     $contact = new Contact();
-    $contact->id = null;
-    $contact->name = $_POST['nameContact'];
-    $contact->email = $_POST['emailContact'];
-    $contact->phone = $_POST['phoneContact'];
-    $contact->message = $_POST['messageContact'];
+    $contact->name = $_POST['contactName'];
+    $contact->email = $_POST['contactEmail'];
+    $contact->phone = $_POST['contactPhone'];
+    $contact->message = $_POST['contactMessage'];
+
     switch ($_POST['btnForm']) {
         case "addContact":
-            $cc->createContact($contact);
+            $is_valid = GUMPController();
+            
+            if($is_valid === true) {
+                $cc->createContact($contact);
+            }
+            break;
+
+        case "readContact":
+
             break;
     }
 }
+
 
 class CrudContact
 {
@@ -31,13 +41,12 @@ class CrudContact
             $conexion = (new CrudContact)->conexion;
             $query = $conexion->prepare("INSERT INTO contacts VALUES (null, :nombre, :email, :telefono, :mensaje);");
             $valores = ['nombre' => $contact->name, 'email' => $contact->email, 'telefono' => $contact->phone, 'mensaje' => $contact->message];
-            $query->execute($valores);
-            echo "contact Created";
-            header('Location: ../WebPages/confirmacionContacto.html');
+            $result = $query->execute($valores);
+            
+            //header('Location: ../WebPages/confirmacionContacto.html');
+            //echo json_encode($result);
         } catch (PDOException $ex) {
-            echo "Hubo un Error <br>";
-            echo $ex;
+            echo json_encode($ex);
         }
     }
 }
-?>
