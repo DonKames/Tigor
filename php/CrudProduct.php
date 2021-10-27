@@ -3,6 +3,7 @@ require_once 'Modelos.php';
 require_once 'BaseDatos.php';
 $cp = new CrudProduct;
 if (isset($_POST['btnForm'])) {
+    require_once 'GUMPController.php';
     $producto = new Producto;
     $producto->codigo = $_POST["codigoProduct"];
     $producto->nombre = $_POST["nombreProduct"];
@@ -11,8 +12,10 @@ if (isset($_POST['btnForm'])) {
     $producto->imagen = $_FILES["imgProduct"];
     switch ($_POST["btnForm"]) {
         case "agregarProduct":
-            $cp->createProduct($producto);
-            header('Location: ../WebPages/administrar.html');
+            $is_valid = GUMPController();
+            if ($is_valid === true) {
+                $cp->createProduct($producto);
+            }
             break;
         case "modificarProduct":
             //$cp->updateProduct();
@@ -50,7 +53,7 @@ class CrudProduct
             $conexion = (new CrudProduct)->conexion;
             $query = $conexion->prepare("INSERT INTO productos VALUES (:codigo, :nombre, :categoria, :descripcion);");
             $valores = ['codigo' => $producto->codigo, 'nombre' => $producto->nombre, 'categoria' => $producto->categoria, 'descripcion' => $producto->descripcion];
-            move_uploaded_file($_FILES["imgProducto"]["tmp_name"], "../imgs/products/" . $producto->codigo);
+            move_uploaded_file($_FILES["imgProduct"]["tmp_name"], "../imgs/products/" . $producto->codigo);
             //move_uploaded_file($_FILES["imgProducto"]["tmp_name"],"E:/OneDrive - INACAP/xampp2/htdocs/Tigor/imgs/products/".$producto->codigo);            
             $query->execute($valores);
             echo $_FILES["imgProduct"]["tmp_name"];

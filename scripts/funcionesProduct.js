@@ -3,10 +3,21 @@ function recuperarProduct(idProduct) {
 }
 
 function recuperarProducts_Producto(filtro) {
-    console.log('../php/CrudProduct.php?btnForm=leerProducts&filtro='+filtro);
-    axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro='+filtro).then((response) => { 
-        console.log(response);
-        renderProducts(response.data); });
+    if (localStorage['filtro']) {
+        let filtro = localStorage['filtro'];
+        localStorage.removeItem('filtro');
+        console.log(filtro);
+        axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro).then((response) => { 
+            console.log(response);
+            renderProducts(response.data);
+        });
+    } else {
+        console.log('../php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro);
+        axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro).then((response) => {
+            console.log(response);
+            renderProducts(response.data);
+        });
+    }
 }
 
 function recuperarProducts_Administrar() {
@@ -31,7 +42,7 @@ function renderProducts(productList) {
         card = document.createElement("div");
         card.setAttribute("class", "card h-100");
         productImg = document.createElement("img");
-        productImg.src = "../imgs/products/"+product.codigo;
+        productImg.src = "../imgs/products/" + product.codigo;
         productImg.setAttribute("class", "card-img-top");
         productImg.setAttribute("onerror", "this.onerror=null; this.src='../imgs/products/asdfasdf4312'");
         cardBody = document.createElement("div");
@@ -82,20 +93,40 @@ function crearTablaProducts(listaProducts) {
         fila.appendChild(botones);
         tabla.appendChild(fila);
         tabla.codigo = "cuerpoTablaMostrarProducts";
-    
+
     }
     actualizarElemento(tabla.codigo, tabla);
 }
 
-function postProduct(){
-    let params = new URLSearchParams();
+function postProduct() {
+    //let params = new URLSearchParams();
+    let formData = new FormData();
     let codigo = document.getElementById('floatCodigoProduct').value;
     let nombre = document.getElementById('floatNombreProduct').value;
     let categoria = document.getElementById('floatSelectCategoriaProduct').value;
     let descripcion = document.getElementById('floatDescripcionProduct').value;
-    params.append('btnForm', 'agregarProduct');
-    params.append('codigoProduct', codigo);
-    params.append('nombreProduct', nombre);
-    params.append('categoriaProduct', categoria);
-    params.append('descripcionProduct', descripcion);
+    let img = document.querySelector('#subirArchivo').files[0];
+    console.log(img);
+    formData.append('btnForm', 'agregarProduct');
+    formData.append('codigoProduct', codigo);
+    formData.append('nombreProduct', nombre);
+    formData.append('categoriaProduct', categoria);
+    formData.append('descripcionProduct', descripcion);
+    formData.append('imgProduct', img);
+    axios.post('../php/CrudProduct.php', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+        .then((response) => {
+            console.log(response);
+            if (response.data[0] == 'failed') {
+                alert(response.data[1][0])
+            } else {
+                alert('Producto Agregado con Exito');
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }

@@ -29,7 +29,11 @@ if (isset($_GET['btnForm'])) {
             $cc->readCategorias();
             break;
         case "leerCategoria":
-            $cc->readCategoria(htmlspecialchars($_GET['idCategoria']));
+            $is_valid = GUMPController();
+            if ($is_valid === true) {
+                $cc->readCategoria($_GET['idCategoria']);
+            }
+            //$cc->readCategoria(htmlspecialchars($_GET['idCategoria']));
             break;
         case "eliminarCategoria":
             $cc->deleteCategoria(htmlspecialchars($_GET['idCategoria']));

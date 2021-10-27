@@ -19,7 +19,7 @@
   <script>
     //window.onload = recuperarClientes();
     //window.onload = recuperarProveedores();
-    //window.onload = recuperarCategorias("administrar");
+    window.onload = recuperarCategorias("administrar");
     //window.onload = recuperarProducts_Administrar();
   </script>
 </head>
@@ -431,7 +431,7 @@
                       </div>
                       <div class="row">
                         <div class="d-flex justify-content-end">
-                          <button type="submit" class="btn btn-primary btn-lg" name="btnForm" value="agregarProduct" id="btnAgregarProduct">
+                          <button type="button" class="btn btn-primary btn-lg" name="btnForm" value="agregarProduct" id="btnAgregarProduct" onclick="postProduct()">
                             Agregar Producto
                           </button>
                           <button type="reset" class="btn btn-danger btn-lg me-5" id="btnResetProduct" onclick="resetCliente('Product')" hidden>

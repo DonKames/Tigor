@@ -180,7 +180,7 @@ function GUMPController()
                 ]
             ]);
 
-            $is_valid = $gump->run($_POST);
+            $is_valid = $gump->run(array_merge($_POST, $_FILES));
             $response = new ArrayObject();
             if ($gump->errors()) {
                 $response->append("failed");
@@ -239,5 +239,12 @@ function GUMPController()
             }
             
             break; 
+    }
+
+    switch ($_GET['btnForm']){
+        case "leerCategoria":
+            $gump->validation_rules([
+                'idCategoria' => 'required|numeric'
+            ]);
     }
 }

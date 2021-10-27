@@ -98,11 +98,16 @@ function dropdownCategoriasIndex(listaCategorias) {
         option = document.createElement('a');
         option.setAttribute("class", "dropdown-item");
         option.setAttribute("href", "#");
-        option.setAttribute("onclick", "recuperarProducts_Producto('" + categoria.nombre + "')");
+        option.setAttribute("onclick", "changeToProducts('" + categoria.nombre + "')");
         option.innerHTML = categoria.nombre;
         li.appendChild(option);
         dropdownCategoriasIndex.appendChild(li);
     }
+}
+
+function changeToProducts(filtro){
+    localStorage.setItem("filtro", filtro);
+    window.location.href = "productos.html";
 }
 
 function renderCategorias(listaCategorias) {
@@ -114,6 +119,7 @@ function renderCategorias(listaCategorias) {
         nombreCategoria = document.createElement("h1");
         categoria = listaCategorias[i];
         divCategoria.setAttribute("class", "col-12 col-md-6 mb-5 divCategoria");
+        divCategoria.setAttribute("onclick", "changeToProducts(" + categoria.nombre + ")");
         nombreCategoria.setAttribute("class", "bg-success bg-gradient h-100 rounded d-flex align-items-center justify-content-center categoriasIndex");
         nombreCategoria
         nombreCategoria.innerHTML = categoria.nombre;
