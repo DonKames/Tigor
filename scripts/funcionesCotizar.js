@@ -1,4 +1,4 @@
-function agregarFilaProducto(){
+function agregarFilaProducto() {
     console.log("Entramos a agregarFilaProducto()");
     let productosCotizacion = document.getElementById("productosCotizacion");
     let cantHijosActu = productosCotizacion.children.length + 1;
@@ -42,10 +42,54 @@ function agregarFilaProducto(){
     productosCotizacion.appendChild(filaProductoNueva);
 }
 
-function eliminarFilaProducto(idFilaProducto){
+function eliminarFilaProducto(idFilaProducto) {
     console.log("Entramos a eliminarFilaProducto()")
     let filaProducto = document.getElementById(idFilaProducto);
     let padre = filaProducto.parentNode;
     padre.removeChild(filaProducto);
 }
 
+function postCotizacion() {
+    let formData = new FormData();
+    let fechaCotizacion = new Date();
+    let rutCotizacion = document.getElementById("floatRUTCotizacion").value;
+    let nombreCotizacion = document.getElementById("floatNombreCotizacion").value;
+    let direccionCotizacion = document.getElementById("floatDireccionCotizacion").value;
+    let comunaCotizacion = document.getElementById("floatSelectComunaCotizacion").value;
+    let emailCotizacion = document.getElementById("floatEmailCotizacion").value;
+    let telefonoCotizacion = document.getElementById("floatTelefonoCotizacion").value;
+    let cantProds = document.getElementById("productosCotizacion").children.length;
+    let listaCodigos = [];
+    let listaNombres = [];
+    let listaCantidades = [];
+    formData.append("btnForm", "addCotizacion")
+    formData.append("fechaCotizacion", fechaCotizacion.toLocaleDateString());
+    formData.append("rutCotizacion", rutCotizacion);
+    formData.append("nombreCotizacion", nombreCotizacion);
+    formData.append("direccionCotizacion", direccionCotizacion);
+    formData.append("comunaCotizacion", comunaCotizacion);
+    formData.append("emailCotizacion", emailCotizacion);
+    formData.append("telefonoCotizacion", telefonoCotizacion);
+    console.log(formData);
+    for (i = 0; i < cantProds; i++) {
+        listaCodigos[i] = document.getElementById("productosCotizacion").children[i].children[0].children[0].value;
+        listaNombres[i] = document.getElementById("productosCotizacion").children[i].children[1].children[0].value;
+        listaCantidades[i] = document.getElementById("productosCotizacion").children[i].children[2].children[0].value;
+    }
+    formData.append("listaCodigos", listaCodigos);
+    formData.append("listaNombres", listaNombres);
+    formData.append("listaCantidades", listaCantidades);
+    axios.post("../php/CrudCotizacion.php", formData).then((response) => {
+        console.log(response);
+        if (response.data[0] == 'failed') {
+            alert(response.data[1][0])
+        } else {
+            alert('Producto Agregado con Exito');
+        }
+    })
+        .catch((error) => {
+            console.log(error);
+        });
+    console.log(listaCodigos + " " + listaNombres + " " + listaCantidades);
+    console.log(fechaCotizacion.toDateString());
+}

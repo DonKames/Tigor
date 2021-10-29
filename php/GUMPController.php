@@ -220,6 +220,7 @@ function GUMPController()
                     'between_len' => 'El telefono debe tener entre 8 y 12 caracteres'
                 ],
                 'contactMessage' => [
+                    'required' => 'El mensaje es requerido',
                     'alpha_numeric_space' => 'El mensaje debe contener solo letras y numeros',
                     'between_len' => 'El mensaje debe tener entre 3 y 5000 caracteres'
                 ]
@@ -237,9 +238,70 @@ function GUMPController()
                 echo json_encode($response);
                 return true;
             }
-            
-            break; 
-    }
+            break;
+
+        case "addCotizacion":
+            $gump->validation_rules([
+                'fechaCotizacion' => 'required|date,d-m-Y',
+                'rutCotizacion' => 'required|numeric|between_len,8;15',
+                'nombreCotizacion' => 'required|alpha_numeric_space|between_len,3;50',
+                'direccionCotizacion' => 'required|alpha_numeric_space|between_len,5;50',
+                'comunaCotizacion' => 'required|alpha_numeric_dash|between_len,1;50',
+                'emailCotizacion' => 'required|valid_email|between_len,5;50',
+                'telefonoCotizacion' => 'required|numeric|between_len,8;15'
+            ]);
+
+            $gump->set_fields_error_messages([
+                'fechaCotizacion' => [
+                    'required' => 'La fecha es requerida',
+                    'date_format' => 'La fecha debe ser valida'
+                ],
+                'rutCotizacion' => [
+                    'required' => 'El rut es requerido',
+                    'numeric' => 'El rut debe ser numerico',
+                    'between_len' => 'El rut debe tener entre 8 y 15 caracteres'
+                ],
+                'nombreCotizacion' => [
+                    'required' => 'El nombre es requerido',
+                    'alpha_numeric_space' => 'El nombre debe contener solo letras y numeros',
+                    'between_len' => 'El nombre debe tener entre 3 y 50 caracteres'
+                ],
+                'direccionCotizacion' => [
+                    'required' => 'La direccion es requerida',
+                    'alpha_numeric_space' => 'La direccion debe contener solo letras y numeros',
+                    'between_len' => 'La direccion debe tener entre 5 y 50 caracteres'
+                ],
+                'comunaCotizacion' => [
+                    'required' => 'La comuna es requerida',
+                    'alpha_numeric_dash' => 'La comuna debe contener solo letras, numeros y guiones',
+                    'between_len' => 'La comuna debe tener entre 3 y 50 caracteres'
+                ],
+                'emailCotizacion' => [
+                    'required' => 'El email es requerido',
+                    'valid_email' => 'El email debe ser valido',
+                    'between_len' => 'El email debe tener entre 5 y 50 caracteres'
+                ],
+                'telefonoCotizacion' => [
+                    'required' => 'El telefono es requerido',
+                    'numeric' => 'El telefono debe ser numerico',
+                    'between_len' => 'El telefono debe tener entre 8 y 15 caracteres'
+                ]
+            ]);
+
+            $is_valid = $gump->run($_POST);
+            $response = new ArrayObject();
+            if ($gump->errors()) {
+                $response->append("failed");
+                $errors = $gump->get_readable_errors();
+                $response->append($errors);
+                echo json_encode($response);
+                return $is_valid;
+            }else{
+                $response->append("success");
+                echo json_encode($response);
+                return true;
+            }
+        }
 
     switch ($_GET['btnForm']){
         case "leerCategoria":

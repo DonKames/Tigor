@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!--INSERTANDO SCRIPT PROPIO-->
     <script src="../scripts/funcionesCotizar.js"></script>
 </head>
@@ -58,27 +58,28 @@
                 <!--Form Cotizacion-->
                 <form action="">
                     <div class="row">
-                        
+
                         <!--Datos Usuario Cotizacion-->
-                        <div class="row">
+                        <div class="row" id="headerCotizacion">
+                            <div class="form-floating col-12 col-md-6 mb-3" hidden>
+                                <input type="text" class="form-control" id="floatIdCotizacion"
+                                    placeholder="idCotizacion">
+                                <label for="floatIdCotizacion" class="ms-3">Id</label>
+                            </div>
+                            <div class="form-floating col-12 col-md-6 mb-3" hidden>
+                                <input type="date" class="form-control" id="floatFechaCotizacion"
+                                    placeholder="fechaCotizacion">
+                                <label for="floatFechaCotizacion" class="ms-3">Fecha</label>
+                            </div>
                             <div class="form-floating col-12 col-md-6 mb-3">
-                                <input type="text" class="form-control" id="floatRUTCotizacion" placeholder="RUTCotizacion">
+                                <input type="text" class="form-control" id="floatRUTCotizacion"
+                                    placeholder="RUTCotizacion">
                                 <label for="floatRUTCotizacion" class="ms-3">RUT</label>
                             </div>
                             <div class="form-floating col-12 col-md-6 mb-3">
                                 <input type="text" class="form-control" id="floatNombreCotizacion"
                                     placeholder="nombreCotizacion">
                                 <label for="floatNombreCotizacion" class="ms-3">Nombre</label>
-                            </div>
-                            <div class="form-floating col-12 col-md-6 mb-3" hidden>
-                                <input type="text" class="form-control" id="floatNumeroCotizacion"
-                                    placeholder="numeroCotizacion">
-                                <label for="floatNumeroCotizacion" class="ms-3">Numero</label>
-                            </div>
-                            <div class="form-floating col-12 col-md-6 mb-3" hidden>
-                                <input type="date" class="form-control" id="floatFechaCotizacion"
-                                    placeholder="fechaCotizacion">
-                                <label for="floatFechaCotizacion" class="ms-3">Fecha</label>
                             </div>
                             <div class="form-floating col-12 col-md-6 mb-3">
                                 <input type="text" class="form-control" id="floatDireccionCotizacion"
@@ -149,7 +150,8 @@
                                 </div>
 
                                 <div class="form-floating col-12 col-sm-1 col-md-1 mb-3 d-flex align-items-center">
-                                    <button type="button" class="btn btn-danger" onclick="eliminarFilaProducto('filaProducto1')">-</button>
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="eliminarFilaProducto('filaProducto1')">-</button>
                                 </div>
                             </div>
 
@@ -186,7 +188,8 @@
                                 </div>
 
                                 <div class="form-floating col-12 col-md-1 mb-3 d-flex align-items-center">
-                                    <button type="button" class="btn btn-danger" onclick="eliminarFilaProducto('filaProducto2')">-</button>
+                                    <button type="button" class="btn btn-danger"
+                                        onclick="eliminarFilaProducto('filaProducto2')">-</button>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +200,8 @@
                         <div class="col-4"></div>
                         <div class="col-4">
                             <div class="row">
-                                <button type="submit" class="btn btn-primary btn-lg">Cotizar</button>
+                                <button type="button" class="btn btn-primary btn-lg"
+                                    onclick="postCotizacion()">Cotizar</button>
                             </div>
                         </div>
                         <div class="col-4"></div>

@@ -113,17 +113,21 @@ function changeToProducts(filtro){
 function renderCategorias(listaCategorias) {
     let renderCategorias = document.getElementById("renderCategorias");
     let divCategoria;
+    let button;
     let nombreCategoria;
     for (i = 0; i < listaCategorias.length; i++) {
         divCategoria = document.createElement("div");
+        button = document.createElement("button");
         nombreCategoria = document.createElement("h1");
         categoria = listaCategorias[i];
-        divCategoria.setAttribute("class", "col-12 col-md-6 mb-5 divCategoria");
-        divCategoria.setAttribute("onclick", "changeToProducts(" + categoria.nombre + ")");
-        nombreCategoria.setAttribute("class", "bg-success bg-gradient h-100 rounded d-flex align-items-center justify-content-center categoriasIndex");
-        nombreCategoria
+        divCategoria.setAttribute("class", "col-12 col-md-6 mb-5 d-grid");
+        divCategoria.setAttribute("onclick", "changeToProducts('" + categoria.nombre + "')");
+        button.setAttribute("class", "btn btn-primary bg-gradient ");
+        button.setAttribute("type", "button");
+        button.setAttribute("onclick", "changeToProducts('" + categoria.nombre+ "')")
         nombreCategoria.innerHTML = categoria.nombre;
-        divCategoria.appendChild(nombreCategoria);
+        button.appendChild(nombreCategoria);
+        divCategoria.appendChild(button);
         renderCategorias.appendChild(divCategoria);
     }
 }
