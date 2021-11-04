@@ -81,7 +81,7 @@ function postCotizacion() {
     formData.append("listaCantidades", listaCantidades);
     axios.post("../php/CrudCotizacion.php", formData).then((response) => {
         console.log(response);
-        if (response.data[0] == 'failed') {
+        if (response.data[0] !== 'success'){
             alert(response.data[1][0])
         } else {
             alert('Producto Agregado con Exito');
@@ -90,6 +90,5 @@ function postCotizacion() {
         .catch((error) => {
             console.log(error);
         });
-    console.log(listaCodigos + " " + listaNombres + " " + listaCantidades);
     console.log(fechaCotizacion.toDateString());
 }

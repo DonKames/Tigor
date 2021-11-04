@@ -170,4 +170,13 @@ class Cotizacion
         public $listaCodigos = [];
         public $listaNombres = [];
         public $listaCantidades = [];
+        public $listaProductos = [];
+}
+
+class ProdCotizacion{
+        public $id;
+        public $idCotizacion;
+        public $codigoProd;
+        public $nombreProd;
+        public $cantidadProd;
 }
