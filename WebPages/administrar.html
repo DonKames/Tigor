@@ -18,6 +18,7 @@
   <script src="../scripts/funcionesCategoria.js"></script>
   <script src="../scripts/funcionesProduct.js"></script>
   <script src="../scripts/funcionesSession.js"></script>
+  <script src="../scripts/funcionesCotizacion.js"></script>
 
   <script>
     //window.onload = recuperarClientes();
@@ -100,8 +101,8 @@
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="tabCotizaciones" data-bs-toggle="tab" data-bs-target="#cotizacionesConte"
-              type="button" role="tab" aria-controls="tabCotizaciones"
-              aria-selected="false"><strong>Cotizaciones</strong></button>
+              type="button" role="tab" aria-controls="tabCotizaciones" aria-selected="false"
+              onclick="getCotizaciones()"><strong>Cotizaciones</strong></button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="tabContacto" data-bs-toggle="tab" data-bs-target="#contactoConte" type="button"
@@ -609,8 +610,9 @@
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">ID</th>
-                            <th scope="col">Nombre</th>
                             <th scope="col">Fecha</th>
+                            <th scope="col">RUT</th>
+                            <th scope="col">Nombre</th>
                             <th scope="col">Email</th>
                             <th scope="col"></th>
                           </tr>
@@ -619,6 +621,10 @@
                           <tr>
                             <th scope="row" class="placeholder">1</th>
                             <td class="placeholder">Cargando su TABLA</td>
+                            <td class="placeholder">Cargando su TABLA</td>
+                            <td class="placeholder">Cargando su TABLA</td>
+                            <td class="placeholder">Cargando su TABLA</td>
+                            <td class="placeholder">Cargando su TABLA</td>
                           </tr>
                         </tbody>
                       </table>
@@ -626,45 +632,134 @@
                   </div>
                 </div>
               </div>
-              <!--Accordion opcion 2 Agregar Cotizacion-->
+              <!--Accordion opcion 2 Responder Cotizacion-->
               <div class="accordion-item">
-                <h2 class="accordion-header" id="headerAgregarCotizacion">
+                <h2 class="accordion-header" id="headerResponderCotizacion">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapseAgregarCotizacion" aria-expanded="false"
-                    aria-controls="collapseAgregarCotizacion" id="btnAccordionAgregarCotizacion"><strong>Agregar
+                    data-bs-target="#collapseResponderCotizacion" aria-expanded="false"
+                    aria-controls="collapseResponderCotizacion" id="btnAccordionResponderCotizacion"><strong>Responder
                       Cotizacion</strong></button>
                 </h2>
-                <div id="collapseAgregarCotizacion" class="accordion-collapse collapse"
+                <div id="collapseResponderCotizacion" class="accordion-collapse collapse"
                   aria-labelledby="headerMostrarCotizacion" data-bs-parent="#accordionCotizacion">
                   <div class="accordion-body">
-                    <form action="../php/CrudCategoria.php" method="post">
-                      <div class="row">
-                        <div class="form-floating col-12 col-md-6 mb-3" hidden>
-                          <input type="text" class="form-control" id="floatIdCategoria" placeholder="idCategoria"
-                            name="idCategoria">
-                          <label for="floatIdCategoria" class="ms-3">Id</label>
+                    <div class="row card" id="cotizacion">
+                      <div class="card-body">
+                        <div class="row">
+                          <img src="../imgs/tigor header cotiz.jpg" alt="">
                         </div>
-                        <div class="form-floating col-12 col-md-6 mb-3">
-                          <input type="text" class="form-control" id="floatNombreCategoria"
-                            placeholder="nombreCategoria" name="nombreCategoria">
-                          <label for="floatNombreCategoria" class="ms-3">Nombre</label>
+                        <hr>
+                        <div class="row">
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon1">Nombre</span>
+                              <input type="text" class="form-control" placeholder="Username" value="Nombre"
+                                aria-label="Username" id="nombreCotizacion" aria-describedby="basic-addon1" disabled>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon1">N° Cotización</span>
+                              <input type="text" class="form-control" placeholder="Username" value="N° Cotización"
+                                aria-label="Username" id="numeroCotizacion" aria-describedby="basic-addon1" disabled>
+                            </div>
+                          </div>
                         </div>
-                        <div class="d-flex justify-content-end col-12 col-md-6 mb-3">
-                          <button type="submit" class="btn btn-primary btn-lg flex-md-fill" name="btnForm"
-                            value="agregarCategoria" id="btnAgregarCategoria">
-                            Agregar Categoria
-                          </button>
-                          <button type="reset" class="btn btn-danger btn-lg me-5" id="btnResetCategoria"
-                            onclick="resetCliente('Categoria')" hidden>
-                            Cancelar
-                          </button>
-                          <button type="submit" class="btn btn-primary btn-lg" name="btnForm" value="modificarCategoria"
-                            id="btnModificarCategoria" onclick="" hidden>
-                            Modificar Cliente
-                          </button>
+                        <div class="row">
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon1">RUT</span>
+                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                id="rutCotizacion" aria-describedby="basic-addon1" disabled>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon1">Fecha</span>
+                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                id="fechaCotizacion" aria-describedby="basic-addon1" disabled>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon1">Dirección</span>
+                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                id="direccionCotizacion" aria-describedby="basic-addon1" disabled>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon1">Comuna</span>
+                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                id="comunaCotizacion" aria-describedby="basic-addon1" disabled>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon1">Email</span>
+                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                id="emailCotizacion" aria-describedby="basic-addon1" readonly>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon1">Teléfono</span>
+                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                id="telefonoCotizacion" aria-describedby="basic-addon1" readonly>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-12">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th>Id</th>
+                                  <th>Codigo</th>
+                                  <th>Nombre</th>
+                                  <th>Valor Unitario</th>
+                                  <th>Unidades</th>
+                                  <th>Total</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tBodyProdsCotizacion"></tbody>
+                            </table>
+                            <div class="d-flex flex-row-reverse">
+                              <div class="col-12 col-md-4 mb-3">
+                                <div class="input-group">
+                                  <span class="input-group-text col-3" id="basic-addon1">Valor Neto</span>
+                                  <input type="text" class="form-control" placeholder="Username" aria-label="Username" value="0"
+                                    id="valorNetoCotizacion" aria-describedby="basic-addon1" readonly>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-flex flex-row-reverse">
+                              <div class="col-12 col-md-4 mb-3">
+                                <div class="input-group">
+                                  <span class="input-group-text col-3" id="basic-addon1">IVA 19%</span>
+                                  <input type="text" class="form-control" placeholder="Username" aria-label="Username" value="0"
+                                    id="ivaNetoCotizacion" aria-describedby="basic-addon1" readonly>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="d-flex flex-row-reverse">
+                              <div class="col-12 col-md-4 mb-3">
+                                <div class="input-group">
+                                  <span class="input-group-text col-3" id="basic-addon1">TOTAL</span>
+                                  <input type="text" class="form-control fw-bold" placeholder="Username" aria-label="Username" value="0"
+                                    id="totalCotizacion" aria-describedby="basic-addon1" readonly>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>

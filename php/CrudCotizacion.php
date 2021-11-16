@@ -47,11 +47,26 @@ if (isset($_POST['btnForm'])) {
                         $cc->createProdCotizacion($prodCotizacion);
                     }
                 }
-
-                
                 $prodCotizacion->idCotizacion = $id;
-                
             }
+            break;
+    }
+}
+
+if (isset($_GET['btnForm'])) {
+    require_once 'Modelos.php';
+    require_once 'BaseDatos.php';
+    require_once 'GUMPController.php';
+    $cc = new CrudCotizacion;
+    switch ($_GET['btnForm']) {
+        case 'readCotizaciones':
+            $cc->readCotizaciones();
+            break;
+        case 'readCotizacion':
+            $cc->readCotizacion($_GET['idCotizacion']);
+            break;
+        case 'readProdsCotizacion':
+            $cc->readProdsCotizacion($_GET['idCotizacion']);
             break;
     }
 }
@@ -91,6 +106,30 @@ class CrudCotizacion
         }
     }
 
+    function readCotizacion()
+    {
+        try {
+            $conexion = (new CrudCotizacion)->conexion;
+            $query = $conexion->prepare("SELECT * FROM cotizaciones WHERE id = :id;");
+            $valores = ["id" => $_GET['idCotizacion']];
+            $query->execute($valores);
+            if ($resultado = $query->fetch()) {
+                $cotizacion = new Cotizacion();
+                $cotizacion->id = $resultado["id"];
+                $cotizacion->fecha = $resultado["fecha"];
+                $cotizacion->rut = $resultado["rut"];
+                $cotizacion->nombre = $resultado["nombre"];
+                $cotizacion->direccion = $resultado["direccion"];
+                $cotizacion->comuna = $resultado["comuna"];
+                $cotizacion->email = $resultado["email"];
+                $cotizacion->telefono = $resultado["telefono"];
+                echo json_encode($cotizacion);
+            }
+        } catch (PDOException $ex) {
+            echo json_encode($ex->getMessage() . " error readIdCotizacion");
+        }
+    }
+
     function createProdCotizacion($prodCotizacion)
     {
         try {
@@ -105,6 +144,54 @@ class CrudCotizacion
             $query->execute($valores);
         } catch (PDOException $ex) {
             echo json_encode($ex->getMessage() . " error CreateProdCotizacion");
+        }
+    }
+
+    function readCotizaciones()
+    {
+        try {
+            $conexion = (new CrudCotizacion)->conexion;
+            $query = $conexion->prepare("SELECT * FROM cotizaciones");
+            $query->execute();
+            $cotizacionList = [];
+            while ($resultado = $query->fetch()) {
+                $cotizacion = new Cotizacion();
+                $cotizacion->id = $resultado['id'];
+                $cotizacion->fecha = $resultado['fecha'];
+                $cotizacion->rut = $resultado['rut'];
+                $cotizacion->nombre = $resultado['nombre'];
+                $cotizacion->direccion = $resultado['direccion'];
+                $cotizacion->comuna = $resultado['comuna'];
+                $cotizacion->email = $resultado['email'];
+                $cotizacion->telefono = $resultado['telefono'];
+                $cotizacionList[] = $cotizacion;
+            }
+            echo json_encode($cotizacionList);
+        } catch (PDOException $ex) {
+            echo json_encode($ex->getMessage() . " error readCotizaciones");
+        }
+    }
+
+    function readProdsCotizacion($idCotizacion)
+    {
+        try {
+            $conexion = (new CrudCotizacion)->conexion;
+            $query = $conexion->prepare("SELECT * FROM prodcotizacion WHERE idCotizacion = :id");
+            $valores = ["id" => $idCotizacion];
+            $query->execute($valores);
+            $prodsCotizacionList = [];
+            while ($resultado = $query->fetch()) {
+                $cotizacion = new ProdCotizacion();
+                $cotizacion->id = $resultado['id'];
+                $cotizacion->idCotizacion = $resultado['idCotizacion'];
+                $cotizacion->codigoProd = $resultado['codigoProd'];
+                $cotizacion->nombreProd = $resultado['nombreProd'];
+                $cotizacion->cantidadProd = $resultado['cantidadProd'];
+                $prodsCotizacionList[] = $cotizacion;
+            }
+            echo json_encode($prodsCotizacionList);
+        } catch (PDOException $ex) {
+            echo json_encode($ex->getMessage() . " error readCotizaciones");
         }
     }
 }

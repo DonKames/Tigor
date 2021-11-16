@@ -9,6 +9,7 @@ function crearTablaClientes(listaClientes) {
     let comuna;
     let mail;
     let telefono;
+    let cliente;
 
     for (i = 0; i < listaClientes.length; i++) {
         cliente = listaClientes[i];
