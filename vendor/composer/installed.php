@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '095dda4928cc0eae751e53669ac7354dd09040e8',
+        'reference' => '04f71a64fd64685d83594d45c55156ebb8ba8c5b',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '095dda4928cc0eae751e53669ac7354dd09040e8',
+            'reference' => '04f71a64fd64685d83594d45c55156ebb8ba8c5b',
             'dev_requirement' => false,
         ),
         'dompdf/dompdf' => array(
@@ -54,6 +54,21 @@
             'aliases' => array(),
             'reference' => 'd217848e1396ef962fb1997cf3e2421acba7f796',
             'dev_requirement' => false,
+        ),
+        'twbs/bootstrap' => array(
+            'pretty_version' => 'v5.1.0',
+            'version' => '5.1.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../twbs/bootstrap',
+            'aliases' => array(),
+            'reference' => 'f20fece3a8cdd0e76a42c2737524b7652bf54d26',
+            'dev_requirement' => false,
+        ),
+        'twitter/bootstrap' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v5.1.0',
+            ),
         ),
         'wixel/gump' => array(
             'pretty_version' => 'v1.12.1',

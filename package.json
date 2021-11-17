@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "axios": "^0.23.0",
-    "bootstrap": "^5.0.0-beta3"
+    "bootstrap": "^5.0.0-beta3",
+    "html2pdf.js": "^0.10.1"
   }
 }

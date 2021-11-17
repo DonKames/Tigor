@@ -1,13 +1,48 @@
-const { default: axios } = require("axios");
+function goPDF(){
+    let cantprods = document.getElementById('tBodyProdsCotizacion').childElementCount;
+    console.log(cantprods);
+    let inputValorUnitario;
+    for (let i = 0; i < cantprods; i++) {
+        inputValorUnitario = document.getElementById('unitario' + i).value;
+        document.getElementById('valorUnitario' + i).innerHTML = inputValorUnitario;
+    }
+    
+    let htmlCotizacion = document.getElementById('cotizacion').innerHTML;
+    sessionStorage.setItem('htmlCotizacion', htmlCotizacion);
+    window.location.href = "../php/cotizacion.php";
+}
+
+function aPDF(){
+    let cotizacion = document.body;
+    //html2pdf(cotizacion);
+    html2pdf()
+    .set({
+        margin: 1,
+        filename: 'documento.pdf',
+        image: {
+            type: 'jpeg',
+            quality: 0.98
+        },
+        html2canvas: {
+            scale: 3, // A mayor escala, mejores gráficos, pero más peso
+            letterRendering: true,
+        },
+        jsPDF: {
+            unit: "in",
+            format: "a3",
+            orientation: 'portrait' // landscape o portrait
+        }
+    })
+    .from(cotizacion)
+    .save()
+    .catch(err => console.log(err));
+}
 
 function crearPDF(){
-    let formData = new FormData();
-    let cotizacion = document.getElementById('cotizacion');
-    formData.append('btnForm', 'crearPDF');
-    formData.append('cotizacion', cotizacion);
-    axios.post('../php/CrearPDF.php', formData).then((response) => {
-        console.log(response.data);
-    });
+    let cotizacion = sessionStorage.getItem('htmlCotizacion');
+    let body = document.getElementById("body");
+    body.innerHTML = cotizacion;
+    console.log("FUNCION crearPDF");
 }
 
 function getCotizaciones() {
@@ -115,6 +150,7 @@ function crearTablaProdsCotizacion(listaCotizaciones) {
         nombre.innerHTML = cotizacion.nombreProd;
         valorUnitario.innerHTML = `<input type='text' onchange='setTotal(` + i + `)' id='unitario` + i + `'>`;
         unidades.innerHTML = cotizacion.cantidadProd;
+        valorUnitario.id = "valorUnitario" + i;
         unidades.id = "unidades" + i;
         total.id = "total" + i;
         fila.appendChild(hFila);
@@ -152,9 +188,12 @@ function setTotal(id) {
         }
     }
     console.log(valorTotalNeto);
-    totalNeto.value = valorTotalNeto;
-    ivaNetoCotizacion.value = valorTotalNeto * 0.19;
-    total.value = parseInt(totalNeto.value) + parseInt(ivaNetoCotizacion.value);
+    //totalNeto.value = valorTotalNeto;
+    totalNeto.setAttribute("value", valorTotalNeto);
+    //ivaNetoCotizacion.value = valorTotalNeto * 0.19;
+    ivaNetoCotizacion.setAttribute("value", valorTotalNeto * 0.19);
+    //total.value = parseInt(totalNeto.value) + parseInt(ivaNetoCotizacion.value);
+    total.setAttribute("value", parseInt(totalNeto.value) + parseInt(ivaNetoCotizacion.value));
 }
 
 function renderResponderCotizacion(id) {
@@ -185,12 +224,20 @@ function rellenarCotizacion(cotizacion) {
     let comuna = document.getElementById("comunaCotizacion");
     let email = document.getElementById("emailCotizacion");
     let telefono = document.getElementById("telefonoCotizacion");
-    id.value = cotizacion.id;
-    fecha.value = cotizacion.fecha;
-    rut.value = cotizacion.rut;
-    nombre.value = cotizacion.nombre;
-    direccion.value = cotizacion.direccion;
-    comuna.value = cotizacion.comuna;
-    email.value = cotizacion.email;
-    telefono.value = cotizacion.telefono;
+    //id.value = cotizacion.id;
+    id.setAttribute('value', cotizacion.id);
+    //fecha.value = cotizacion.fecha;
+    fecha.setAttribute('value', cotizacion.fecha);
+    //rut.value = cotizacion.rut;
+    rut.setAttribute('value', cotizacion.rut);
+    //nombre.value = cotizacion.nombre;
+    nombre.setAttribute('value', cotizacion.nombre);
+    //direccion.value = cotizacion.direccion;
+    direccion.setAttribute('value', cotizacion.direccion);
+    //comuna.value = cotizacion.comuna;
+    comuna.setAttribute('value', cotizacion.comuna);
+    //email.value = cotizacion.email;
+    email.setAttribute('value', cotizacion.email);
+    //telefono.value = cotizacion.telefono;
+    telefono.setAttribute('value', cotizacion.telefono);
 }

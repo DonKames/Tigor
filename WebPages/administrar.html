@@ -19,7 +19,7 @@
   <script src="../scripts/funcionesProduct.js"></script>
   <script src="../scripts/funcionesSession.js"></script>
   <script src="../scripts/funcionesCotizacion.js"></script>
-
+  <script src="../node_modules/html2pdf.js/dist/html2pdf.bundle.min.js"></script>
   <script>
     //window.onload = recuperarClientes();
     //window.onload = recuperarProveedores();
@@ -642,8 +642,8 @@
                 </h2>
                 <div id="collapseResponderCotizacion" class="accordion-collapse collapse"
                   aria-labelledby="headerMostrarCotizacion" data-bs-parent="#accordionCotizacion">
-                  <div class="accordion-body">
-                    <div class="row card" id="cotizacion">
+                  <div class="accordion-body" id="cotizacion">
+                    <div class="row card">
                       <div class="card-body">
                         <div class="row">
                           <img src="../imgs/tigor header cotiz.jpg" alt="">
@@ -659,57 +659,57 @@
                           </div>
                           <div class="col-12 col-md-6 mb-3">
                             <div class="input-group">
-                              <span class="input-group-text col-3" id="basic-addon1">N° Cotización</span>
+                              <span class="input-group-text col-3" id="basic-addon2">N° Cotización</span>
                               <input type="text" class="form-control" placeholder="Username" value="N° Cotización"
-                                aria-label="Username" id="numeroCotizacion" aria-describedby="basic-addon1" disabled>
+                                aria-label="Username" id="numeroCotizacion" aria-describedby="basic-addon2" disabled>
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-12 col-md-6 mb-3">
                             <div class="input-group">
-                              <span class="input-group-text col-3" id="basic-addon1">RUT</span>
+                              <span class="input-group-text col-3" id="basic-addon3">RUT</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                id="rutCotizacion" aria-describedby="basic-addon1" disabled>
+                                id="rutCotizacion" aria-describedby="basic-addon3" disabled>
                             </div>
                           </div>
                           <div class="col-12 col-md-6 mb-3">
                             <div class="input-group">
-                              <span class="input-group-text col-3" id="basic-addon1">Fecha</span>
+                              <span class="input-group-text col-3" id="basic-addon4">Fecha</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                id="fechaCotizacion" aria-describedby="basic-addon1" disabled>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12 col-md-6 mb-3">
-                            <div class="input-group">
-                              <span class="input-group-text col-3" id="basic-addon1">Dirección</span>
-                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                id="direccionCotizacion" aria-describedby="basic-addon1" disabled>
-                            </div>
-                          </div>
-                          <div class="col-12 col-md-6 mb-3">
-                            <div class="input-group">
-                              <span class="input-group-text col-3" id="basic-addon1">Comuna</span>
-                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                id="comunaCotizacion" aria-describedby="basic-addon1" disabled>
+                                id="fechaCotizacion" aria-describedby="basic-addon4" disabled>
                             </div>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-12 col-md-6 mb-3">
                             <div class="input-group">
-                              <span class="input-group-text col-3" id="basic-addon1">Email</span>
+                              <span class="input-group-text col-3" id="basic-addon5">Dirección</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                id="emailCotizacion" aria-describedby="basic-addon1" readonly>
+                                id="direccionCotizacion" aria-describedby="basic-addon5" disabled>
                             </div>
                           </div>
                           <div class="col-12 col-md-6 mb-3">
                             <div class="input-group">
-                              <span class="input-group-text col-3" id="basic-addon1">Teléfono</span>
+                              <span class="input-group-text col-3" id="basic-addon6">Comuna</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                                id="telefonoCotizacion" aria-describedby="basic-addon1" readonly>
+                                id="comunaCotizacion" aria-describedby="basic-addon6" disabled>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon7">Email</span>
+                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                id="emailCotizacion" aria-describedby="basic-addon7" readonly>
+                            </div>
+                          </div>
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="input-group">
+                              <span class="input-group-text col-3" id="basic-addon8">Teléfono</span>
+                              <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                id="telefonoCotizacion" aria-describedby="basic-addon8" readonly>
                             </div>
                           </div>
                         </div>
@@ -760,6 +760,7 @@
                         </div>
                       </div>
                     </div>
+                    <button type="button" class="btn btn-primary" onclick="goPDF()">Crear PDF</button>
                   </div>
                 </div>
               </div>
