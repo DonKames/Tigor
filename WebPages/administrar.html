@@ -19,6 +19,7 @@
   <script src="../scripts/funcionesProduct.js"></script>
   <script src="../scripts/funcionesSession.js"></script>
   <script src="../scripts/funcionesCotizacion.js"></script>
+  <script src="../scripts/funcionesComuna.js"></script>
   <script src="../node_modules/html2pdf.js/dist/html2pdf.bundle.min.js"></script>
   <script>
     //window.onload = recuperarClientes();
@@ -34,14 +35,14 @@
 
   <!--HEADER-->
   <header>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <nav class="navbar navbar-expand navbar-light bg-secondary">
       <div class="container">
         <a class="navbar-brand" href="index.html">CyD Torres Igor</a>
         <!-- El NAVBAR y sus opciones -->
         <ul class="navbar-nav">
           <li class="btn-group">
-            <a type="button" class="btn btn-dark" href="productos.html">Nuestros Productos</a>
-            <button type="button" class="btn btn-dark dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+            <a type="button" class="btn btn-secondary" href="productos.html">Nuestros Productos</a>
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
               aria-expanded="false">
               <span class="visually-hidden">Toggle Dropdown</span>
             </button>
@@ -57,10 +58,11 @@
           <li class="nav-item">
             <a class="nav-link" href="contactanos.html">Contactanos</a>
           </li>
-          <a href="cotizar.html"><button class="btn btn-outline-secondary" type="button">Cotiza</button></a>
+          <a href="cotizar.html"><button class="btn btn-outline-dark" type="button">Cotiza</button></a>
         </ul>
       </div>
     </nav>
+    <div style="height: 3px; background-color: red;"></div>
   </header>
   <!--Cuerpo-->
   <div class="container">
@@ -152,12 +154,11 @@
                           <label for="floatDireccionCliente" class="ms-3">Direccion</label>
                         </div>
                         <div class="form-floating col-12 col-md-6 mb-3">
-                          <select class="form-select" id="floatSelectComunaCliente" aria-label="labelSelect"
-                            name="comunaCliente" required>
-                            <option selected value="0">Seleccione su Comuna</option>
-                            <option value="1">Comuna 1</option>
-                            <option value="2">Comuna 2</option>
-                          </select>
+                          <input class="form-control" list="datalistComunasCliente"
+                            id="floatSelectComunaCliente" placeholder="Escriba para buscar...">
+                          <datalist id="datalistComunasCliente">
+                          </datalist>
+                          <script>window.onload = getComunas();</script>
                           <label for="floatSelectComunaCliente" class="ms-3">Comuna</label>
                         </div>
                       </div>
@@ -286,12 +287,8 @@
                           <label for="floatDireccionProveedor" class="ms-3">Direccion</label>
                         </div>
                         <div class="form-floating col-12 col-md-6 mb-3">
-                          <select class="form-select" id="floatSelectComunaProveedor" aria-label="labelSelect"
-                            name="comunaProveedor">
-                            <option selected value="0">Seleccione su Comuna</option>
-                            <option value="1">Comuna 1</option>
-                            <option value="2">Comuna 2</option>
-                          </select>
+                          <input class="form-control" list="datalistComunasCliente"
+                            id="floatSelectComunaCliente" placeholder="Escriba para buscar...">
                           <label for="floatSelectComunaProveedor" class="ms-3">Comuna</label>
                         </div>
                       </div>
@@ -650,30 +647,30 @@
                         </div>
                         <hr>
                         <div class="row">
-                          <div class="col-12 col-md-6 mb-3">
+                          <div class="col-12 col-md-6 mb-1">
                             <div class="input-group">
                               <span class="input-group-text col-3" id="basic-addon1">Nombre</span>
                               <input type="text" class="form-control" placeholder="Username" value="Nombre"
                                 aria-label="Username" id="nombreCotizacion" aria-describedby="basic-addon1" disabled>
                             </div>
                           </div>
-                          <div class="col-12 col-md-6 mb-3">
+                          <div class="col-12 col-md-6 mb-1">
                             <div class="input-group">
-                              <span class="input-group-text col-3" id="basic-addon2">N° Cotización</span>
+                              <span class="input-group-text col-3" id="basic-addon2">ID</span>
                               <input type="text" class="form-control" placeholder="Username" value="N° Cotización"
                                 aria-label="Username" id="numeroCotizacion" aria-describedby="basic-addon2" disabled>
                             </div>
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-12 col-md-6 mb-3">
+                          <div class="col-12 col-md-6 mb-1">
                             <div class="input-group">
                               <span class="input-group-text col-3" id="basic-addon3">RUT</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
                                 id="rutCotizacion" aria-describedby="basic-addon3" disabled>
                             </div>
                           </div>
-                          <div class="col-12 col-md-6 mb-3">
+                          <div class="col-12 col-md-6 mb-1">
                             <div class="input-group">
                               <span class="input-group-text col-3" id="basic-addon4">Fecha</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
@@ -682,14 +679,14 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-12 col-md-6 mb-3">
+                          <div class="col-12 col-md-6 mb-1">
                             <div class="input-group">
                               <span class="input-group-text col-3" id="basic-addon5">Dirección</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
                                 id="direccionCotizacion" aria-describedby="basic-addon5" disabled>
                             </div>
                           </div>
-                          <div class="col-12 col-md-6 mb-3">
+                          <div class="col-12 col-md-6 mb-1">
                             <div class="input-group">
                               <span class="input-group-text col-3" id="basic-addon6">Comuna</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
@@ -698,14 +695,14 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-12 col-md-6 mb-3">
+                          <div class="col-12 col-md-6 mb-1">
                             <div class="input-group">
                               <span class="input-group-text col-3" id="basic-addon7">Email</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
                                 id="emailCotizacion" aria-describedby="basic-addon7" readonly>
                             </div>
                           </div>
-                          <div class="col-12 col-md-6 mb-3">
+                          <div class="col-12 col-md-6 mb-1">
                             <div class="input-group">
                               <span class="input-group-text col-3" id="basic-addon8">Teléfono</span>
                               <input type="text" class="form-control" placeholder="Username" aria-label="Username"
@@ -730,29 +727,30 @@
                               <tbody id="tBodyProdsCotizacion"></tbody>
                             </table>
                             <div class="d-flex flex-row-reverse">
-                              <div class="col-12 col-md-4 mb-3">
+                              <div class="col-12 col-md-5 mb-3">
                                 <div class="input-group">
-                                  <span class="input-group-text col-3" id="basic-addon1">Valor Neto</span>
-                                  <input type="text" class="form-control" placeholder="Username" aria-label="Username" value="0"
-                                    id="valorNetoCotizacion" aria-describedby="basic-addon1" readonly>
+                                  <span class="input-group-text col-4" id="basic-addon1">Valor Neto</span>
+                                  <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                    value="0" id="valorNetoCotizacion" aria-describedby="basic-addon1" readonly>
                                 </div>
                               </div>
                             </div>
                             <div class="d-flex flex-row-reverse">
-                              <div class="col-12 col-md-4 mb-3">
+                              <div class="col-12 col-md-5 mb-3">
                                 <div class="input-group">
-                                  <span class="input-group-text col-3" id="basic-addon1">IVA 19%</span>
-                                  <input type="text" class="form-control" placeholder="Username" aria-label="Username" value="0"
-                                    id="ivaNetoCotizacion" aria-describedby="basic-addon1" readonly>
+                                  <span class="input-group-text col-4" id="basic-addon1">IVA 19%</span>
+                                  <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                    value="0" id="ivaNetoCotizacion" aria-describedby="basic-addon1" readonly>
                                 </div>
                               </div>
                             </div>
                             <div class="d-flex flex-row-reverse">
-                              <div class="col-12 col-md-4 mb-3">
+                              <div class="col-12 col-md-5 mb-3">
                                 <div class="input-group">
-                                  <span class="input-group-text col-3" id="basic-addon1">TOTAL</span>
-                                  <input type="text" class="form-control fw-bold" placeholder="Username" aria-label="Username" value="0"
-                                    id="totalCotizacion" aria-describedby="basic-addon1" readonly>
+                                  <span class="input-group-text col-4" id="basic-addon1">TOTAL</span>
+                                  <input type="text" class="form-control fw-bold" placeholder="Username"
+                                    aria-label="Username" value="0" id="totalCotizacion" aria-describedby="basic-addon1"
+                                    readonly>
                                 </div>
                               </div>
                             </div>
@@ -760,7 +758,7 @@
                         </div>
                       </div>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="goPDF()">Crear PDF</button>
+                    <button id="btnCrearPDF" type="button" class="btn btn-primary mt-3" onclick="goPDF()">Crear PDF</button>
                   </div>
                 </div>
               </div>
@@ -853,13 +851,13 @@
 
   <!--FOOTER-->
 
-  <footer class="bg-dark text-white-50 g-0 pt-2 mt-auto">
+  <footer class="bg-secondary text-white-50 g-0 pt-2 mt-auto">
     <div class="container border-top d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
       <div class="col-md-4 d-flex align-items-center">
         <a href="index.html" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
           <img src="../imgs/tigorLogo.jpg" alt="" class="" style="width: 100px; height: auto;">
         </a>
-        <span class="text-muted">Comercializadora y Distribuidora Torres Igor</span>
+        <span class="text-dark">Comercializadora y Distribuidora Torres Igor</span>
       </div>
 
       <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">

@@ -129,7 +129,7 @@
         </div>
     </div>
     <script>
-        window.onload = aPDF();
+        window.onload = crearPDF();
     </script>
 </body>
 

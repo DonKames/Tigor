@@ -6,10 +6,12 @@ function goPDF(){
         inputValorUnitario = document.getElementById('unitario' + i).value;
         document.getElementById('valorUnitario' + i).innerHTML = inputValorUnitario;
     }
-    
+    let btnCrearPDF = document.getElementById('btnCrearPDF');
+    btnCrearPDF.setAttribute('hidden', true);
     let htmlCotizacion = document.getElementById('cotizacion').innerHTML;
     sessionStorage.setItem('htmlCotizacion', htmlCotizacion);
-    window.location.href = "../php/cotizacion.php";
+    window.open("../php/cotizacion.php","_blank");
+    location.reload();
 }
 
 function aPDF(){
@@ -17,19 +19,19 @@ function aPDF(){
     //html2pdf(cotizacion);
     html2pdf()
     .set({
-        margin: 1,
+        margin: 0.1,
         filename: 'documento.pdf',
         image: {
             type: 'jpeg',
-            quality: 0.98
+            quality: 1
         },
         html2canvas: {
-            scale: 3, // A mayor escala, mejores gráficos, pero más peso
+            scale: 5, // A mayor escala, mejores gráficos, pero más peso
             letterRendering: true,
         },
         jsPDF: {
             unit: "in",
-            format: "a3",
+            format: "letter",
             orientation: 'portrait' // landscape o portrait
         }
     })
@@ -43,6 +45,7 @@ function crearPDF(){
     let body = document.getElementById("body");
     body.innerHTML = cotizacion;
     console.log("FUNCION crearPDF");
+    aPDF();
 }
 
 function getCotizaciones() {
