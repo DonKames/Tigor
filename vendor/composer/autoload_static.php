@@ -15,12 +15,20 @@ class ComposerStaticInit13a00210095e270860ba75f4638d7bf2
         array (
             'GUMP\\' => 5,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'GUMP\\' => 
         array (
             0 => __DIR__ . '/..' . '/wixel/gump/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
     );
 
