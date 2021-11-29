@@ -1,6 +1,7 @@
 {
     "require": {
         "wixel/gump": "^1.12",
-        "firebase/php-jwt": "^5.5"
+        "firebase/php-jwt": "^5.5",
+        "phpmailer/phpmailer": "^6.5"
     }
 }

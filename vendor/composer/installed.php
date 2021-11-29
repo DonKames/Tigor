@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '38eac52ffd09290583f583deeb9f242cc01f268d',
+        'reference' => 'ba5f8750e0ff8e9b6b5e0a3a78b045aa6049668f',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '38eac52ffd09290583f583deeb9f242cc01f268d',
+            'reference' => 'ba5f8750e0ff8e9b6b5e0a3a78b045aa6049668f',
             'dev_requirement' => false,
         ),
         'firebase/php-jwt' => array(
@@ -26,6 +26,15 @@
             'install_path' => __DIR__ . '/../firebase/php-jwt',
             'aliases' => array(),
             'reference' => '83b609028194aa042ea33b5af2d41a7427de80e6',
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.5.3',
+            'version' => '6.5.3.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'reference' => 'baeb7cde6b60b1286912690ab0693c7789a31e71',
             'dev_requirement' => false,
         ),
         'wixel/gump' => array(

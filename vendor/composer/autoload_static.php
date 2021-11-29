@@ -11,6 +11,10 @@ class ComposerStaticInit13a00210095e270860ba75f4638d7bf2
     );
 
     public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
         'G' => 
         array (
             'GUMP\\' => 5,
@@ -22,6 +26,10 @@ class ComposerStaticInit13a00210095e270860ba75f4638d7bf2
     );
 
     public static $prefixDirsPsr4 = array (
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
         'GUMP\\' => 
         array (
             0 => __DIR__ . '/..' . '/wixel/gump/src',

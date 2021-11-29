@@ -115,12 +115,15 @@ function renderCategorias(listaCategorias) {
     let divCategoria;
     let button;
     let nombreCategoria;
+    let shadow;
     for (i = 0; i < listaCategorias.length; i++) {
+        shadow = document.createElement("div")
         divCategoria = document.createElement("div");
         button = document.createElement("button");
         nombreCategoria = document.createElement("h1");
         categoria = listaCategorias[i];
-        divCategoria.setAttribute("class", "col-12 col-md-6 mb-5 d-grid");
+        shadow.setAttribute("class", "col-12 col-md-6 g-3");
+        divCategoria.setAttribute("class", "mb-2 d-grid shadow g-0");
         divCategoria.setAttribute("onclick", "changeToProducts('" + categoria.nombre + "')");
         button.setAttribute("class", "btn btn-primary bg-gradient ");
         button.setAttribute("type", "button");
@@ -128,7 +131,8 @@ function renderCategorias(listaCategorias) {
         nombreCategoria.innerHTML = categoria.nombre;
         button.appendChild(nombreCategoria);
         divCategoria.appendChild(button);
-        renderCategorias.appendChild(divCategoria);
+        shadow.appendChild(divCategoria);
+        renderCategorias.appendChild(shadow);
     }
 }
 

@@ -1,3 +1,17 @@
+<?php
+require_once '../vendor/autoload.php';
+use Firebase\JWT\JWT;
+$token = $_COOKIE['token'];
+//echo json_encode($token);
+try{
+  $data = JWT::decode($token, 'R1O2G3I4T5', array('HS256'));
+}catch(Exception $e){
+  header('Location: login.html');
+}
+//echo json_encode($data);
+?>
+
+<script></script>
 <!DOCTYPE html>
 <html class="h-100" lang="es">
 

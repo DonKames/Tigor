@@ -1,9 +1,11 @@
 <?php
 require_once 'Modelos.php';
 require_once 'BaseDatos.php';
+require_once 'PhpMailer.php';
 $cc = new CrudContact;
 if (isset($_POST['btnForm'])) {
     require_once 'GUMPController.php';
+    
     $contact = new Contact();
     $contact->name = $_POST['contactName'];
     $contact->email = $_POST['contactEmail'];
@@ -15,6 +17,7 @@ if (isset($_POST['btnForm'])) {
             $is_valid = GUMPController();
             if($is_valid === true) {
                 $cc->createContact($contact);
+                $cc->sendEmail($contact);
             }
             break;
 
@@ -47,5 +50,15 @@ class CrudContact
         } catch (PDOException $ex) {
             echo json_encode($ex);
         }
+    }
+    function sendEmail($contact)
+    {
+        $mailer = new Mailer();
+        $mailer->sendMail($contact);
+        $to = "demon_camilo@hotmail.com";
+        $subject = "Mensaje de " . $contact->name . ".";
+        $message = "Mensaje de " . $contact->name . ": " . $contact->message;
+        $headers = "From: contacto@tigor.cl";
+        //mail($to, $subject, $message, $headers);
     }
 }

@@ -5,13 +5,17 @@ function Login(){
     formData.append("userLogin", user);
     formData.append("passLogin", pass);
     formData.append("btnForm", "leerUsuario")
+    let config;
     axios.post('../php/Login.php', formData)
         .then(response => {
-            if(response.data[0] === "Validado"){
-                console.log(response);
+            console.log(response.data.status);
+            if(response.data.status === "Validado"){
                 console.log(sessionStorage);
-                sessionStorage.setItem("user", user);
-                location.href = "administrar.html"
+                sessionStorage.setItem("token", response.data.token);
+                //let xhr = new XMLHttpRequest();
+                //xhr.open("GET", "../php/administrar.php");
+                config = {'Authorizations': 'bearer ' + response};
+                location.href = "administrar.php"
             }else{
                 console.log(response);
                 console.log(sessionStorage.getItem("id"));
