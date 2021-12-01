@@ -61,13 +61,14 @@
             </div>
             <div class="row mb-5 h-100">
                 <div class="col-12 col-md-6 text-center mt-5 d-flex align-items-center justify-content-center">
-                    <!--<img src="../imgs/logoTigorRounded.svg" alt="">-->
-                    <p class="h4 mt-3"><strong>Telefono<br>+569 7352 4463 <br> <br> Email<br>ventas@tigor.cl</strong></p>
+                    <img src="../imgs/Contacto.jpg" class="img-fluid" alt="">
+
+                    <!--<p class="h4 mt-3"><strong>Telefono<br>+569 7352 4463 <br> <br> Email<br>ventas@tigor.cl</strong></p>-->
                 </div>
                 <div class="col-12 col-md-6 mt-5 align-middle h-100">
                     <div class="card">
                         <div class="card-body">
-                            <form action="../php/CrudContact.php" method="post" id="formContact">
+                            <form action="" method="post" id="formContact">
                                 <div class="form-floating mb-3 col-12">
                                     <input type="text" class="form-control" id="contactName" name="nameContact"
                                         placeholder="Empresa Ficticia" required>
@@ -84,14 +85,14 @@
                                     <label for="contactPhone">Telefono / Celular</label>
                                 </div>
                                 <div class="form-floating mb-3 col-12">
-                                    <textarea class="form-control" placeholder="Leave a comment here" name="messageContact"
+                                    <textarea class="form-control" placeholder="Leave a comment here"
                                         id="contactMessage" style="height: 30%" required></textarea>
                                     <label for="contactMessage">Mensaje</label>
                                     <div id="messageHelp" class="form-text">Maximo 5000 caracteres.</div>
                                 </div>
                                 <div class="form-floating mb-3 ps-5 pe-5 col-12">
                                     <div class="row">
-                                        <button type="button" class="btn btn-primary" name="btnForm" value="addContact" onclick="postContact()">
+                                        <button type="button" class="btn btn-primary" onclick="postContact()">
                                             Enviar
                                         </button>
                                     </div>
@@ -105,15 +106,15 @@
     </div>
     
     <!--FOOTER-->
-    <footer class="bg-secondary g-0 pt-2 mt-auto">
-        <div class="container border-top d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
-            <div class="col-md-4 d-flex align-items-center">
+    <footer class="bg-secondary text-dark g-0 pt-2 mt-auto h-100">
+        <div class="container border-top border-dark d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+            <div class="col-md-6 d-flex align-items-center">
                 <a href="index.html" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <img src="../imgs/tigorLogo.jpg" alt="" class="" style="width: 100px; height: auto;">
+                    <img src="../imgs/logoTigor.svg" alt="" class="" style="width: 100px; height: auto;">
                 </a>
-                <span class="text-muted">Comercializadora y Distribuidora Torres Igor</span>
+                <span class="fs-4">Comercializadora y Distribuidora Torres Igor</span>
             </div>
-    
+
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
                 <li class="ms-3"><a class="text-muted" href="#"><svg class="" width="24" height="24">
                             <use xlink:href="#twitter">

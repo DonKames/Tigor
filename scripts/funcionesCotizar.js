@@ -92,3 +92,28 @@ function postCotizacion() {
         });
     console.log(fechaCotizacion.toDateString());
 }
+
+function getCategorias(from){
+    axios.get('../php/CrudCategoria.php?btnForm=leerCategorias&from='+from).then(response => {
+        console.log(response.data);
+        loadCategorias(response.data);
+    })
+}
+
+function loadCategorias(listaCategorias){
+    let dropdownCategoriasNew = document.createElement("div");
+    let li;
+    let a;
+    for(i=0; i<listaCategorias.length; i++){
+        li = document.createElement("li");
+        a = document.createElement("a");
+        a.setAttribute("class", "dropdown-item");
+        a.setAttribute("href", "#");
+        a.setAttribute("onclick", "changeToProducts('"+listaCategorias[i].nombre+"')");
+        a.innerHTML = listaCategorias[i].nombre;
+        li.appendChild(a);
+        dropdownCategoriasNew.appendChild(li);
+    }
+    dropdownCategoriasNew.setAttribute("id", "dropdownCategorias");
+    actualizarElemento(dropdownCategoriasNew.id, dropdownCategoriasNew);
+}

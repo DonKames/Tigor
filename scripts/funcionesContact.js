@@ -3,7 +3,7 @@ function postContact() {
     let email = document.getElementById("contactEmail").value;
     let phone = document.getElementById("contactPhone").value;
     let message = document.getElementById("contactMessage").value;
-    let params = new URLSearchParams();
+    let params = new FormData();
     params.append('contactName', name);
     params.append('contactEmail', email);
     params.append('contactPhone', phone);

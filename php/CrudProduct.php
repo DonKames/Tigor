@@ -25,7 +25,6 @@ if (isset($_POST['btnForm'])) {
 if (isset($_GET['btnForm'])) {
     switch ($_GET['btnForm']) {
         case "leerProducts":
-            
             $cp->readProducts($_GET["filtro"]);
             break;
         case "leerProduct":

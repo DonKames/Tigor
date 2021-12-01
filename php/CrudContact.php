@@ -55,10 +55,6 @@ class CrudContact
     {
         $mailer = new Mailer();
         $mailer->sendMail($contact);
-        $to = "demon_camilo@hotmail.com";
-        $subject = "Mensaje de " . $contact->name . ".";
-        $message = "Mensaje de " . $contact->name . ": " . $contact->message;
-        $headers = "From: contacto@tigor.cl";
-        //mail($to, $subject, $message, $headers);
+        
     }
 }

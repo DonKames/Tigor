@@ -17,6 +17,7 @@
     <!--INSERTANDO SCRIPT PROPIO-->
     <script src="../scripts/funcionesCotizar.js"></script>
     <script src="../scripts/funcionesComuna.js"></script>
+    <script src="../scripts/funcionesGenerales.js"></script>
 </head>
 
 <body class="d-flex flex-column h-100">
@@ -38,14 +39,17 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Categoria 1</a></li>
-                            <li><a class="dropdown-item" href="#">Categoria 2</a></li>
+                            <div id="dropdownCategorias">
+                                <li><a class="dropdown-item" href="#">Categoria 1</a></li>
+                                <li><a class="dropdown-item" href="#">Categoria 2</a></li>
+                            </div>
+                            <script>window.onload = getCategorias("Cotizar")</script>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contactanos.html">Contactanos</a>
                     </li>
-                    <a href="cotizar.html"><button class="btn btn-outline-secondary" type="button">Cotiza</button></a>
+                    <a href="cotizar.html"><button class="btn btn-outline-dark" type="button">Cotiza</button></a>
                 </ul>
             </div>
         </nav>
@@ -217,13 +221,13 @@
     </div>
 
     <!--FOOTER-->
-    <footer class="bg-secondary text-white-50 g-0 pt-2 mt-auto">
-        <div class="container border-top d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
-            <div class="col-md-4 d-flex align-items-center">
+    <footer class="bg-secondary text-dark g-0 pt-2 mt-auto ">
+        <div class="container border-top border-dark d-flex flex-wrap justify-content-between align-items-center py-3 my-4">
+            <div class="col-md-6 d-flex align-items-center">
                 <a href="index.html" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                    <img src="../imgs/tigorLogo.jpg" alt="" class="" style="width: 100px; height: auto;">
+                    <img src="../imgs/logoTigor.svg" alt="" class="" style="width: 100px; height: auto;">
                 </a>
-                <span class="text-muted">Comercializadora y Distribuidora Torres Igor</span>
+                <span class="fs-4">Comercializadora y Distribuidora Torres Igor</span>
             </div>
 
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">

@@ -20,6 +20,11 @@ function actualizarElemento(idTabla, newTabla) {
     oldTabla.parentNode.replaceChild(newTabla, oldTabla);
 }
 
+function changeToProducts(filtro){
+    localStorage.setItem("filtro", filtro);
+    window.location.href = "productos.html";
+}
+
 function confirmarEliminar(tipo, id) {
     console.log("Entre a confirmarEliminarCliente()");
     let pregunta = "Seguro desea eliminar al " + tipo + ": " + id + " ?";

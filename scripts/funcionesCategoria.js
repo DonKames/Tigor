@@ -105,11 +105,6 @@ function dropdownCategoriasIndex(listaCategorias) {
     }
 }
 
-function changeToProducts(filtro){
-    localStorage.setItem("filtro", filtro);
-    window.location.href = "productos.html";
-}
-
 function renderCategorias(listaCategorias) {
     let renderCategorias = document.getElementById("renderCategorias");
     let divCategoria;
