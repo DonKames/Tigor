@@ -84,7 +84,7 @@ function postCotizacion() {
         if (response.data[0] !== 'success'){
             alert(response.data[1][0])
         } else {
-            alert('Producto Agregado con Exito');
+            alert('Cotización Agregada con Exito');
         }
     })
         .catch((error) => {

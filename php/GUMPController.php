@@ -11,7 +11,7 @@ function GUMPController()
                     'rutCliente' => 'required|numeric|between_len,8;15',
                     'nombreCliente' => 'required|alpha_space|between_len,3;50',
                     'direccionCliente' => 'required|alpha_numeric_space|between_len,5;50',
-                    'comunaCliente' => 'required|alpha_numeric_dash|between_len,1;50',
+                    'comunaCliente' => 'required|alpha_numeric_space|between_len,1;50',
                     'emailCliente' => 'required|valid_email|between_len,5;50',
                     'telefonoCliente' => 'required|numeric|between_len,8;15'
                 ]);
@@ -34,7 +34,7 @@ function GUMPController()
                     ],
                     'comunaCliente' => [
                         'required' => 'La comuna es requerida',
-                        'alpha_numeric_dash' => 'La comuna debe contener solo letras, numeros y guiones',
+                        'alpha_numeric_space' => 'La comuna debe contener solo letras, numeros y guiones',
                         'between_len' => 'La comuna debe tener entre 1 y 50 caracteres'
                     ],
                     'emailCliente' => [
@@ -200,7 +200,7 @@ function GUMPController()
                 $gump->validation_rules([
                     'contactName' => 'required|alpha_numeric_space|between_len,3;50',
                     'contactEmail' => 'required|valid_email|between_len,5;50',
-                    'contactPhone' => 'required|numeric|between_len,8;12',
+                    'contactPhone' => 'required|phone_number|between_len,8;12',
                     'contactMessage' => 'required|alpha_numeric_space|between_len,3;5000'
                 ]);
     
@@ -217,7 +217,7 @@ function GUMPController()
                     ],
                     'contactPhone' => [
                         'required' => 'El telefono es requerido',
-                        'numeric' => 'El telefono debe ser numerico',
+                        'phone_number' => 'El telefono debe ser Valido',
                         'between_len' => 'El telefono debe tener entre 8 y 12 caracteres'
                     ],
                     'contactMessage' => [
@@ -247,7 +247,7 @@ function GUMPController()
                     'rutCotizacion' => 'required|numeric|between_len,8;15',
                     'nombreCotizacion' => 'required|alpha_numeric_space|between_len,3;50',
                     'direccionCotizacion' => 'required|alpha_numeric_space|between_len,5;50',
-                    'comunaCotizacion' => 'required|alpha_numeric_dash|between_len,1;50',
+                    'comunaCotizacion' => 'required|alpha_numeric_space|between_len,1;50',
                     'emailCotizacion' => 'required|valid_email|between_len,5;50',
                     'telefonoCotizacion' => 'required|numeric|between_len,8;15'
                 ]);
@@ -298,7 +298,7 @@ function GUMPController()
                     echo json_encode($response);
                     return $is_valid;
                 } else {
-                    //$response->append("success addCotizacion");
+                    //$response->append("success");
                     //echo json_encode($response);
                     return true;
                 }

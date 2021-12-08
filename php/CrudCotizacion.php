@@ -46,6 +46,9 @@ if (isset($_POST['btnForm'])) {
                         $prodCotizacion->cantidadProd = $listaCantidades[$i];
                         $cc->createProdCotizacion($prodCotizacion);
                     }
+                    $response = new ArrayObject();
+                    $response->append('success');
+                    echo json_encode($response);
                 }
                 $prodCotizacion->idCotizacion = $id;
             }
