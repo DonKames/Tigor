@@ -58,14 +58,14 @@ class Login
             $response = new stdClass();
             $token = array(
                 'iat' => $time,
-                'exp' => $time + (60 * 5),
+                'exp' => $time + (60 * 1),
                 'data' => [
                     'id' => $resultado['id'],
                     'name' => $user
                 ]
             );
             $jwt = JWT::encode($token, $key);
-            setcookie('token', $jwt, time() + (60 * 5), "/");
+            setcookie('token', $jwt, time() + (60 * 60), "/");
             $response->status = 'Validado';
             $response->token = $jwt;
             echo json_encode($response);

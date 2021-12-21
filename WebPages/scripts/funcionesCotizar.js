@@ -139,7 +139,7 @@ function postCotizacion() {
     formData.append("listaCodigos", listaCodigos);
     formData.append("listaNombres", listaNombres);
     formData.append("listaCantidades", listaCantidades);
-    axios.post("../php/CrudCotizacion.php", formData).then((response) => {
+    axios.post("php/CrudCotizacion.php", formData).then((response) => {
         console.log(response);
         if (response.data[0] !== 'success') {
             alert(response.data[1][0])
@@ -154,7 +154,7 @@ function postCotizacion() {
 }
 
 function getCategorias(from) {
-    axios.get('../php/CrudCategoria.php?btnForm=leerCategorias&from=' + from).then(response => {
+    axios.get('php/CrudCategoria.php?btnForm=leerCategorias&from=' + from).then(response => {
         console.log(response.data);
         loadCategorias(response.data);
     })
@@ -179,7 +179,7 @@ function loadCategorias(listaCategorias) {
 }
 
 function getCodNameProducts() {
-    axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro=null').then((response) => {
+    axios.get('php/CrudProduct.php?btnForm=leerProducts&filtro=null').then((response) => {
         console.log(response.data);
         dataList(response.data);
     });
@@ -234,7 +234,7 @@ function loadWithName(index) {
 function loadClientCotizacion() {
     console.log("Entramos a loadClientCotizacion");
     rut = document.getElementById("floatRUTCotizacion").value;
-    axios.get('../php/CrudCliente.php?btnForm=leerCliente&idCliente=' + rut).then((response) => {
+    axios.get('php/CrudCliente.php?btnForm=leerCliente&idCliente=' + rut).then((response) => {
         console.log(response.data);
         if(response.data == false){
             document.getElementById("floatNombreCotizacion").value = "";

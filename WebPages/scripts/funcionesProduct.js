@@ -1,6 +1,6 @@
 
 function recuperarProduct(idProduct) {
-    axios.get('../php/CrudProduct.php?btnForm=leerProduct&idProduct=' + idProduct).then((response) => { intercambiarBotonAgregar('Product', response.data) });
+    axios.get('php/CrudProduct.php?btnForm=leerProduct&idProduct=' + idProduct).then((response) => { intercambiarBotonAgregar('Product', response.data) });
 }
 
 function recuperarProducts_Producto(filtro) {
@@ -8,13 +8,13 @@ function recuperarProducts_Producto(filtro) {
         let filtro = localStorage['filtro'];
         localStorage.removeItem('filtro');
         console.log(filtro);
-        axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro).then((response) => { 
+        axios.get('php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro).then((response) => { 
             console.log(response);
             renderProducts(response.data);
         });
     } else {
-        console.log('../php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro);
-        axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro).then((response) => {
+        console.log('php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro);
+        axios.get('php/CrudProduct.php?btnForm=leerProducts&filtro=' + filtro).then((response) => {
             console.log(response);
             renderProducts(response.data);
         });
@@ -22,7 +22,7 @@ function recuperarProducts_Producto(filtro) {
 }
 
 function recuperarProducts_Administrar() {
-    axios.get('../php/CrudProduct.php?btnForm=leerProducts&filtro=null').then((response) => { crearTablaProducts(response.data); });
+    axios.get('php/CrudProduct.php?btnForm=leerProducts&filtro=null').then((response) => { crearTablaProducts(response.data); });
 }
 
 function renderProducts(productList) {
@@ -47,9 +47,9 @@ function renderProducts(productList) {
         card = document.createElement("div");
         card.setAttribute("class", "card h-100 shadow");
         productImg = document.createElement("img");
-        productImg.src = "../imgs/products/" + product.codigo;
+        productImg.src = "imgs/products/" + product.codigo;
         productImg.setAttribute("class", "card-img-top h-100 mt-0 align-top");
-        productImg.setAttribute("onerror", "this.onerror=null; this.src='../imgs/ProntoDisponibleAmarillo.jpg'");
+        productImg.setAttribute("onerror", "this.onerror=null; this.src='imgs/ProntoDisponibleAmarillo.jpg'");
         cardBody = document.createElement("div");
         cardBody.setAttribute("class", "card-body");
         productName = document.createElement("h3");
@@ -97,8 +97,8 @@ function crearTablaProducts(listaProducts) {
         codigo.innerHTML = product.codigo;
         nombre.innerHTML = product.nombre;
         categoria.innerHTML = product.categoria;
-        botones.innerHTML = `<a href="javascript:recuperarProduct('` + product.codigo + `')"><img src="../imgs/editar.png" alt="" style="height:30px; width: 30px;"><a/>
-        <a href="javascript:confirmarEliminar('Product', '` + product.codigo + `')"><img src="../imgs/borrar.png" alt="" style="height:30px; width: 30px;"></a>`;
+        botones.innerHTML = `<a href="javascript:recuperarProduct('` + product.codigo + `')"><img src="imgs/editar.png" alt="" style="height:30px; width: 30px;"><a/>
+        <a href="javascript:confirmarEliminar('Product', '` + product.codigo + `')"><img src="imgs/borrar.png" alt="" style="height:30px; width: 30px;"></a>`;
         fila.appendChild(hFila);
         fila.appendChild(codigo);
         fila.appendChild(nombre);
@@ -126,7 +126,7 @@ function postProduct() {
     formData.append('categoriaProduct', categoria);
     formData.append('descripcionProduct', descripcion);
     formData.append('imgProduct', img);
-    axios.post('../php/CrudProduct.php', formData, {
+    axios.post('php/CrudProduct.php', formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

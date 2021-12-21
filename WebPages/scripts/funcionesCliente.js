@@ -30,8 +30,8 @@ function crearTablaClientes(listaClientes) {
         comuna.innerHTML = cliente.comuna;
         mail.innerHTML = cliente.email;
         telefono.innerHTML = cliente.telefono;
-        botones.innerHTML = `<a href="javascript:recuperarCliente('` + cliente.rut + `')"><img src="../imgs/editar.png" alt="" style="height:30px; width: 30px;"><a/>
-        <a href="javascript:confirmarEliminar('Cliente', '` + cliente.rut + `')"><img src="../imgs/borrar.png" alt="" style="height:30px; width: 30px;"></a>`;
+        botones.innerHTML = `<a href="javascript:recuperarCliente('` + cliente.rut + `')"><img src="imgs/editar.png" alt="" style="height:30px; width: 30px;"><a/>
+        <a href="javascript:confirmarEliminar('Cliente', '` + cliente.rut + `')"><img src="imgs/borrar.png" alt="" style="height:30px; width: 30px;"></a>`;
         fila.appendChild(hFila);
         fila.appendChild(rut);
         fila.appendChild(nombre);
@@ -48,11 +48,11 @@ function crearTablaClientes(listaClientes) {
 }
 
 function recuperarClientes() {
-    axios.get('../php/CrudCliente.php?btnForm=leerClientes').then((response) => { crearTablaClientes(response.data); });
+    axios.get('php/CrudCliente.php?btnForm=leerClientes').then((response) => { crearTablaClientes(response.data); });
 }
 
 function recuperarCliente(idCliente) {
-    axios.get('../php/CrudCliente.php?btnForm=leerCliente&idCliente=' + idCliente).then((response) => { intercambiarBotonAgregar('Cliente', response.data) });
+    axios.get('php/CrudCliente.php?btnForm=leerCliente&idCliente=' + idCliente).then((response) => { intercambiarBotonAgregar('Cliente', response.data) });
 }
 
 function postClient() {
@@ -70,7 +70,7 @@ function postClient() {
     params.append('comunaCliente', comuna);
     params.append('emailCliente', email);
     params.append('telefonoCliente', telefono);
-    axios.post('../php/CrudCliente.php', params)
+    axios.post('php/CrudCliente.php', params)
         .then((response) => {
             if (response.data[0] == 'failed') {
                 alert(response.data[1][0])

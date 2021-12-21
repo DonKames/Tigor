@@ -6,7 +6,7 @@ function Login(){
     formData.append("passLogin", pass);
     formData.append("btnForm", "leerUsuario")
     let config;
-    axios.post('../php/Login.php', formData)
+    axios.post('php/Login.php', formData)
         .then(response => {
             console.log(response.data.status);
             if(response.data.status === "Validado"){

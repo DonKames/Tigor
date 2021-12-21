@@ -21,7 +21,7 @@ if (isset($_POST['btnForm'])) {
             break;
         case "modificarCliente":
             $cc->updateCliente($cliente);
-            header('Location: ../WebPages/administrar.php');
+            header('Location: ../administrar.php');
             break;
     }
 }
@@ -36,7 +36,7 @@ if (isset($_GET['btnForm'])) {
             break;
         case 'eliminarCliente':
             $cc->deleteCliente(htmlspecialchars($_GET['idCliente']));
-            header('Location: ../../WebPages/administrar.php');
+            header('Location: ../../administrar.php');
             break;
     }
 }

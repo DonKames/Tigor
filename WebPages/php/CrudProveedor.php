@@ -20,7 +20,7 @@ if (isset($_POST['btnForm'])) {
             break;
         case "modificarProveedor":
             $cp->updateProveedor($proveedor);
-            header('Location: ../WebPages/administrar.php');
+            header('Location: ../administrar.php');
             break;
     }
 }
@@ -35,7 +35,7 @@ if (isset($_GET['btnForm'])) {
             break;
         case "eliminarProveedor":
             $cp->deleteProveedor(htmlspecialchars($_GET['idProveedor']));
-            header('Location: ../../WebPages/administrar.php');
+            header('Location: ../../administrar.php');
             break;
     }
 }

@@ -10,7 +10,7 @@ function goPDF(){
     btnCrearPDF.setAttribute('hidden', true);
     let htmlCotizacion = document.getElementById('cotizacion').innerHTML;
     sessionStorage.setItem('htmlCotizacion', htmlCotizacion);
-    window.open("../php/cotizacion.php","_blank");
+    window.open("php/cotizacion.php","_blank");
     location.reload();
 }
 
@@ -52,7 +52,7 @@ function getCotizaciones() {
     data = {
         btnForm: 'readCotizaciones'
     };
-    axios.get('../php/CrudCotizacion.php', { params: data }).then((response) => {
+    axios.get('php/CrudCotizacion.php', { params: data }).then((response) => {
         crearTablaCotizaciones(response.data);
         console.log(response.data)
     })
@@ -64,7 +64,7 @@ function getCotizacion(id) {
         btnForm: 'readCotizacion',
         idCotizacion: id
     };
-    axios.get('../php/CrudCotizacion.php', { params: params }).then((response) => {
+    axios.get('php/CrudCotizacion.php', { params: params }).then((response) => {
         console.log(response.data);
         rellenarCotizacion(response.data);
     })
@@ -76,7 +76,7 @@ function getProdsCotizacion(idCotizacion) {
         btnForm: 'readProdsCotizacion',
         idCotizacion: idCotizacion
     };
-    axios.get('../php/CrudCotizacion.php', { params: params }).then((response) => {
+    axios.get('php/CrudCotizacion.php', { params: params }).then((response) => {
         console.log(response.data);
         crearTablaProdsCotizacion(response.data);
     })
@@ -114,7 +114,7 @@ function crearTablaCotizaciones(listaCotizaciones) {
             <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
             <path d="M4.5 12.5A.5.5 0 0 1 5 12h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 10h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm1.639-3.708 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V8.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V8s1.54-1.274 1.639-1.208zM6.25 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5z"/>
             </svg><a/>
-            <a href="#"><img src="../imgs/borrar.png" alt="" style="height:30px; width: 30px;"><a/>`;
+            <a href="#"><img src="imgs/borrar.png" alt="" style="height:30px; width: 30px;"><a/>`;
         fila.appendChild(hFila);
         fila.appendChild(id);
         fila.appendChild(fecha);

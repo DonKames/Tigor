@@ -9,7 +9,7 @@ function postContact() {
     params.append('contactPhone', phone);
     params.append('contactMessage', message);
     params.append('btnForm', 'addContact');
-    axios.post('../php/CrudContact.php', params)
+    axios.post('php/CrudContact.php', params)
         .then((response) => {
             console.log(response);
             if(response.data[0] == 'failed'){
@@ -27,7 +27,7 @@ function getContacts() {
     data = {
         btnForm: 'readContacts'
     };
-    axios.get('../php/CrudContact.php', { params: data }).then((response) => {
+    axios.get('php/CrudContact.php', { params: data }).then((response) => {
         crearTablaContacts(response.data);
         console.log(response.data)
     })
@@ -79,7 +79,7 @@ function renderResponderContact(id){
         btnForm: 'readContact',
         id: id
     };
-    axios.get('../php/CrudContact.php', {params: data}).then((response) => {
+    axios.get('php/CrudContact.php', {params: data}).then((response) => {
         console.log(response);
         document.getElementById('btnAccordionMensajeContacto').click();
         document.getElementById('mailMsgContact').innerHTML = "Correo: " + response.data.email;

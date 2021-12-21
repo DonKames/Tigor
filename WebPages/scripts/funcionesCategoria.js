@@ -3,10 +3,10 @@ function recuperarCategoria(idCategoria) {
 }
 
 function recuperarCategorias(from) {
-    axios.get('../php/CrudCategoria.php?btnForm=leerCategorias').then((response) => {
+    axios.get('php/CrudCategoria.php?btnForm=leerCategorias').then((response) => {
         switch (from) {
             case "administrar":
-                crearTablaCategorias(response.data);
+                addCategoryOptions(response.data);
                 break;
             case "index":
                 dropdownCategoriasIndex(response.data);
@@ -117,7 +117,7 @@ function renderCategorias(listaCategorias) {
         button = document.createElement("button");
         nombreCategoria = document.createElement("h1");
         categoria = listaCategorias[i];
-        shadow.setAttribute("class", "col-12 col-md-6 g-3");
+        shadow.setAttribute("class", "col-12 g-3");
         divCategoria.setAttribute("class", "mb-2 d-grid shadow g-0");
         divCategoria.setAttribute("onclick", "changeToProducts('" + categoria.nombre + "')");
         button.setAttribute("class", "btn btn-primary bg-gradient ");
@@ -148,4 +148,17 @@ function postCategoria(){
         .catch((error) => {
             console.log(error);
         });
+}
+
+function addCategoryOptions(listaCategorias){
+    const selectCategoryProduct = document.getElementById("floatSelectCategoriaProduct");
+    let optionCategoryProduct;
+    let category;
+    for (i = 0; i < listaCategorias.length; i++) {
+        category = listaCategorias[i];
+        optionCategoryProduct = document.createElement('option');
+        optionCategoryProduct.innerHTML = category.nombre;
+        optionCategoryProduct.value = category.nombre;
+        selectCategoryProduct.appendChild(optionCategoryProduct);
+    }
 }

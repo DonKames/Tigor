@@ -32,22 +32,22 @@ function confirmarEliminar(tipo, id) {
     switch (tipo) {
         case "Cliente":
             if (resp) {
-                location.href = "../php/CrudCliente.php/?btnForm=eliminarCliente&idCliente=" + id;
+                location.href = "php/CrudCliente.php/?btnForm=eliminarCliente&idCliente=" + id;
             }
             break;
         case "Proveedor":
             if (resp) {
-                location.href = "../php/CrudProveedor.php/?btnForm=eliminarProveedor&idProveedor=" + id;
+                location.href = "php/CrudProveedor.php/?btnForm=eliminarProveedor&idProveedor=" + id;
             }
             break;
         case "Categoria":
             if (resp) {
-                location.href = "../php/CrudCategoria.php/?btnForm=eliminarCategoria&idCategoria=" + id;
+                location.href = "php/CrudCategoria.php/?btnForm=eliminarCategoria&idCategoria=" + id;
             }
             break;
         case "Product":
             if (resp) {
-                location.href = "../php/CrudProduct.php/?btnForm=eliminarCategoria&idProduct=" + id;
+                location.href = "php/CrudProduct.php/?btnForm=eliminarCategoria&idProduct=" + id;
             }
             break;
 

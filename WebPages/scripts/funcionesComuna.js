@@ -1,5 +1,5 @@
 function getComunas(){
-    axios.get('../php/CrudComunas.php').then((response) => {
+    axios.get('php/CrudComunas.php').then((response) => {
         console.log(response.data);
         derivarComunas(response.data);
     });

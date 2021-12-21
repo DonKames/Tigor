@@ -20,7 +20,8 @@ if (isset($_POST['btnForm'])) {
             }
             break;
         case "modificarProduct":
-            //$cp->updateProduct();
+            $cp->updateProduct($producto);
+            header('Location: ../administrar.php');
     }
 }
 
@@ -33,8 +34,8 @@ if (isset($_GET['btnForm'])) {
             $cp->readProduct(htmlspecialchars($_GET['idProduct']));
             break;
         case "eliminarCategoria":
-            //$cp->deleteCategoria(htmlspecialchars($_GET['idCategoria']));
-            header('Location: ../../WebPages/administrar.php');
+            $cp->deleteProducto(htmlspecialchars($_GET['idProduct']));
+            header('Location: ../../administrar.php');
             break;
     }
 }
@@ -54,8 +55,8 @@ class CrudProduct
             $conexion = (new CrudProduct)->conexion;
             $query = $conexion->prepare("INSERT INTO productos VALUES (:codigo, :nombre, :categoria, :descripcion);");
             $valores = ['codigo' => $producto->codigo, 'nombre' => $producto->nombre, 'categoria' => $producto->categoria, 'descripcion' => $producto->descripcion];
-            if(isset($_FILES['imagenProduct'])){
-                move_uploaded_file($_FILES["imgProduct"]["tmp_name"], "../imgs/products/" . $producto->codigo);
+            if(isset($_FILES['imgProduct'])){
+                move_uploaded_file($_FILES["imgProduct"]["tmp_name"], "E:/OneDrive - INACAP/xampp2/htdocs/TigorRespaldo/WebPages/imgs/products/" . $producto->codigo);
             }
             //move_uploaded_file($_FILES["imgProducto"]["tmp_name"],"E:/OneDrive - INACAP/xampp2/htdocs/Tigor/imgs/products/".$producto->codigo);            
             $query->execute($valores);
@@ -136,26 +137,22 @@ class CrudProduct
     {
         try {
             $conexion = (new CrudProduct)->conexion;
-            $query = $conexion->prepare("UPDATE productos SET nombre = :nombre, categoria = :categoria, descripcion = :descripcion WHERE id = :id;");
-            $valores = ['nombre' => $product->nombre, 'id' => $product->id];
+            $query = $conexion->prepare("UPDATE productos SET nombre = :nombre, categoria = :categoria, descripcion = :descripcion WHERE codigo = :codigo;");
+            $valores = ['nombre' => $product->nombre, 'categoria' => $product->categoria, 'descripcion' => $product->descripcion, 'codigo' => $product->codigo];
             $query->execute($valores);
-            echo $product->id;
-            echo "Product Modificado";
         } catch (PDOException $ex) {
             echo "Hubo un Error <br>";
             echo $ex;
         }
     }
 
-    function deleteCategoria($idCategoria)
+    function deleteProducto($codigo)
     {
         try {
-            echo $idCategoria;
-            $conexion = (new CrudCategoria)->conexion;
-            $query = $conexion->prepare("DELETE FROM categorias WHERE id = :idCategoria;");
-            $valor = ['idCategoria' => $idCategoria];
+            $conexion = (new CrudProduct)->conexion;
+            $query = $conexion->prepare("DELETE FROM productos WHERE codigo = :codigo;");
+            $valor = ['codigo' => $codigo];
             $query->execute($valor);
-            echo "Categoria Eliminado";
         } catch (PDOException $ex) {
             echo $ex->getMessage();
         }

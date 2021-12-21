@@ -28,8 +28,8 @@ function crearTablaProveedores(listaProveedores) {
         comuna.innerHTML = proveedor.comuna;
         mail.innerHTML = proveedor.email;
         telefono.innerHTML = proveedor.telefono;
-        botones.innerHTML = `<a href="javascript:recuperarProveedor('` + proveedor.rut + `')"><img src="../imgs/editar.png" alt="" style="height:30px; width: 30px;"><a/>
-        <a href="javascript:confirmarEliminar('Proveedor', '` + proveedor.rut + `')"><img src="../imgs/borrar.png" alt="" style="height:30px; width: 30px;"></a>`;
+        botones.innerHTML = `<a href="javascript:recuperarProveedor('` + proveedor.rut + `')"><img src="imgs/editar.png" alt="" style="height:30px; width: 30px;"><a/>
+        <a href="javascript:confirmarEliminar('Proveedor', '` + proveedor.rut + `')"><img src="imgs/borrar.png" alt="" style="height:30px; width: 30px;"></a>`;
         fila.appendChild(hFila);
         fila.appendChild(rut);
         fila.appendChild(nombre);
@@ -45,11 +45,11 @@ function crearTablaProveedores(listaProveedores) {
 }
 
 function recuperarProveedores() {
-    axios.get('../php/CrudProveedor.php?btnForm=leerProveedores').then((response) => { crearTablaProveedores(response.data); });
+    axios.get('php/CrudProveedor.php?btnForm=leerProveedores').then((response) => { crearTablaProveedores(response.data); });
 }
 
 function recuperarProveedor(idProveedor) {
-    axios.get('../php/CrudProveedor.php?btnForm=leerProveedor&idProveedor=' + idProveedor).then((response) => { intercambiarBotonAgregar('Proveedor', response.data) });
+    axios.get('php/CrudProveedor.php?btnForm=leerProveedor&idProveedor=' + idProveedor).then((response) => { intercambiarBotonAgregar('Proveedor', response.data) });
 }
 
 function postProveedor() {
@@ -67,7 +67,7 @@ function postProveedor() {
     params.append('comunaProveedor', comuna);
     params.append('emailProveedor', email);
     params.append('telefonoProveedor', telefono);
-    axios.post('../php/CrudProveedor.php', params)
+    axios.post('php/CrudProveedor.php', params)
         .then((response) => {
             console.log(response.data);
             if (response.data[0] == 'failed') {
