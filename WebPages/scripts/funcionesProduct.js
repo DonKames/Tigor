@@ -143,6 +143,7 @@ function postProduct() {
                     }
                 } else {
                     alert('Producto Agregado con Exito');
+                    location.reload();
                 }
             }
         })

@@ -63,6 +63,7 @@ class CrudCliente
             switch ($ex->errorInfo[0]) {
                 case 23000:
                     $resp = new ArrayObject();
+                    $resp->append($ex);
                     $resp->append('El Cliente ya existe');
                     echo json_encode($resp);
                     break;

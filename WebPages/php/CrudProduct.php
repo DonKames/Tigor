@@ -56,7 +56,10 @@ class CrudProduct
             $query = $conexion->prepare("INSERT INTO productos VALUES (:codigo, :nombre, :categoria, :descripcion);");
             $valores = ['codigo' => $producto->codigo, 'nombre' => $producto->nombre, 'categoria' => $producto->categoria, 'descripcion' => $producto->descripcion];
             if(isset($_FILES['imgProduct'])){
-                move_uploaded_file($_FILES["imgProduct"]["tmp_name"], "E:/OneDrive - INACAP/xampp2/htdocs/TigorRespaldo/WebPages/imgs/products/" . $producto->codigo);
+                echo "entre if archivo";
+                $respImg = move_uploaded_file($_FILES["imgProduct"]["tmp_name"], "E:/OneDrive - INACAP/xampp2/htdocs/TigorRespaldo/WebPages/imgs/products/" . $producto->codigo);
+                echo $respImg;
+                echo $_FILES["imgProduct"]["tmp_name"];
             }
             //move_uploaded_file($_FILES["imgProducto"]["tmp_name"],"E:/OneDrive - INACAP/xampp2/htdocs/Tigor/imgs/products/".$producto->codigo);            
             $query->execute($valores);
@@ -65,6 +68,7 @@ class CrudProduct
                 case 23000:
                     $resp = new ArrayObject();
                     $resp->append('El Producto ya existe');
+                    $resp->append($ex);
                     echo json_encode($resp);
                     break;
             }

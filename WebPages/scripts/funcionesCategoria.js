@@ -10,7 +10,6 @@ function recuperarCategorias(from) {
                 break;
             case "index":
                 dropdownCategoriasIndex(response.data);
-                renderCategorias(response.data);
                 break;
             case "products":
                 dropdownCategoriasIndex(response.data);

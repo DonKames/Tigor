@@ -72,6 +72,7 @@ function postClient() {
     params.append('telefonoCliente', telefono);
     axios.post('php/CrudCliente.php', params)
         .then((response) => {
+            console.log(response.data);
             if (response.data[0] == 'failed') {
                 alert(response.data[1][0])
             } else {
