@@ -1,3 +1,6 @@
+let listaClients;
+let numPgClients = 1;
+
 function crearTablaClientes(listaClientes) {
     console.log("Entramos a crearTablaClientes");
     let tabla = document.createElement('tbody');
@@ -48,7 +51,11 @@ function crearTablaClientes(listaClientes) {
 }
 
 function recuperarClientes() {
-    axios.get('php/CrudCliente.php?btnForm=leerClientes').then((response) => { crearTablaClientes(response.data); });
+    axios.get('php/CrudCliente.php?btnForm=leerClientes').then((response) => {
+        listaClients = response.data;
+        crearTablaClientes(listaClients);
+        createPaginationClients(listaClients);
+    });
 }
 
 function recuperarCliente(idCliente) {
@@ -88,4 +95,38 @@ function postClient() {
         .catch((error) => {
             console.log(error);
         });
+}
+
+function createPaginationClients(listaClients){
+    const paginationClients = document.getElementById('paginationClientes');
+    const qtyItemsPage = 10;
+    let qtyPages = Math.ceil(listaClients.length/qtyItemsPage);
+    let pagination = document.getElementById('paginationClients');
+    console.log(qtyPages);
+    let li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    let a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', '#');
+    a.innerHTML = '<';
+    li.appendChild(a);
+    pagination.appendChild(li);
+    for (let i = 0; i < qtyPages; i++) {
+        let li = document.createElement('li');
+        li.setAttribute('class', 'page-item');
+        let a = document.createElement('a');
+        a.setAttribute('class', 'page-link');
+        a.setAttribute('href', '#');
+        a.innerHTML = i + 1;
+        li.appendChild(a);
+        pagination.appendChild(li);
+    }
+    li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', '#');
+    a.innerHTML = '>';
+    li.appendChild(a);
+    pagination.appendChild(li);
 }
