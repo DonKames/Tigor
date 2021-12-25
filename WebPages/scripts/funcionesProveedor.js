@@ -1,4 +1,8 @@
+let listaProviders;
+let numPgProviders = 1;
+
 function crearTablaProveedores(listaProveedores) {
+    let cantPgs = Math.ceil(listaProveedores.length / 10);
     console.log("Entramos a crearTablaProveedores");
     let tabla = document.createElement('tbody');
     let fila;
@@ -9,7 +13,12 @@ function crearTablaProveedores(listaProveedores) {
     let comuna;
     let mail;
     let telefono;
-    for (i = 0; i < listaProveedores.length; i++) {
+    let iMax = numPgProviders * 10;
+    let iStart = iMax - 10;
+    if(cantPgs == numPgProviders){
+        iMax = listaProveedores.length;
+    }
+    for (i = iStart; i < iMax; i++) {
         proveedor = listaProveedores[i];
         fila = document.createElement('tr');
         hFila = document.createElement('th');
@@ -45,7 +54,11 @@ function crearTablaProveedores(listaProveedores) {
 }
 
 function recuperarProveedores() {
-    axios.get('php/CrudProveedor.php?btnForm=leerProveedores').then((response) => { crearTablaProveedores(response.data); });
+    axios.get('php/CrudProveedor.php?btnForm=leerProveedores').then((response) => {
+        listaProviders = response.data;
+        crearTablaProveedores(listaProviders);
+        createPaginationProviders(listaProviders);
+    });
 }
 
 function recuperarProveedor(idProveedor) {
@@ -85,4 +98,59 @@ function postProveedor() {
         .catch((error) => {
             console.log(error);
         });
+}
+
+function createPaginationProviders(listaProviders){
+    const paginationProviders = document.createElement('ul');
+    paginationProviders.id = 'paginationProviders';
+    paginationProviders.setAttribute('class', 'pagination justify-content-center');
+    const qtyItemsPage = 10;
+    let qtyPages = Math.ceil(listaProviders.length/qtyItemsPage);
+    console.log(qtyPages);
+    let li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    let a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', 'javascript:chngPageProvider("<")');
+    a.innerHTML = '<';
+    li.appendChild(a);
+    paginationProviders.appendChild(li);
+    for (let i = 0; i < qtyPages; i++) {
+        let li = document.createElement('li');
+        li.setAttribute('class', 'page-item');
+        let a = document.createElement('a');
+        a.setAttribute('class', 'page-link');
+        a.setAttribute('href', 'javascript:passNumPageProvider('+(i+1)+');');
+        a.innerHTML = i + 1;
+        li.appendChild(a);
+        paginationProviders.appendChild(li);
+    }
+    li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', 'javascript:chngPageProvider(">")');
+    a.innerHTML = '>';
+    li.appendChild(a);
+    paginationProviders.appendChild(li);
+    actualizarElemento(paginationProviders.id, paginationProviders);
+}
+
+function passNumPageProvider(numPage){
+    numPgProviders = numPage;
+    crearTablaProveedores(listaProviders);
+}
+
+function chngPageProvider(change){
+    if (change == '<'){
+        if (numPgProviders > 1){
+            numPgProviders--;
+            crearTablaProveedores(listaProviders);
+        }
+    }else{
+        if (numPgProviders < Math.ceil(listaProviders.length/10)){
+            numPgProviders++;
+            crearTablaProveedores(listaProviders);
+        }
+    }
 }

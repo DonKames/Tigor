@@ -1,3 +1,5 @@
+let listaProducts;
+let numPgProducts = 1;
 
 function recuperarProduct(idProduct) {
     axios.get('php/CrudProduct.php?btnForm=leerProduct&idProduct=' + idProduct).then((response) => { intercambiarBotonAgregar('Product', response.data) });
@@ -22,7 +24,11 @@ function recuperarProducts_Producto(filtro) {
 }
 
 function recuperarProducts_Administrar() {
-    axios.get('php/CrudProduct.php?btnForm=leerProducts&filtro=null').then((response) => { crearTablaProducts(response.data); });
+    axios.get('php/CrudProduct.php?btnForm=leerProducts&filtro=null').then((response) => {
+        listaProducts = response.data;
+        crearTablaProducts(listaProducts);
+        createPaginationProducts(listaProducts);
+    });
 }
 
 function renderProducts(productList) {
@@ -84,7 +90,13 @@ function crearTablaProducts(listaProducts) {
     let hFila;
     let codigo;
     let nombre;
-    for (i = 0; i < listaProducts.length; i++) {
+    let cantPgs = Math.ceil(listaProducts.length / 10);
+    let iMax = numPgProducts * 10;
+    let iStart = iMax - 10;
+    if(cantPgs == numPgProducts){
+        iMax = listaProducts.length;
+    }
+    for (i = iStart; i < iMax; i++) {
         product = listaProducts[i];
         fila = document.createElement('tr');
         hFila = document.createElement('th');
@@ -150,4 +162,59 @@ function postProduct() {
         .catch((error) => {
             console.log(error);
         });
+}
+
+function createPaginationProducts(listaProducts){
+    const paginationProducts = document.createElement('ul');
+    paginationProducts.id = 'paginationProducts';
+    paginationProducts.setAttribute('class', 'pagination justify-content-center');
+    const qtyItemsPage = 10;
+    let qtyPages = Math.ceil(listaProducts.length/qtyItemsPage);
+    console.log(qtyPages);
+    let li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    let a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', 'javascript:chngPageProduct("<")');
+    a.innerHTML = '<';
+    li.appendChild(a);
+    paginationProducts.appendChild(li);
+    for (let i = 0; i < qtyPages; i++) {
+        let li = document.createElement('li');
+        li.setAttribute('class', 'page-item');
+        let a = document.createElement('a');
+        a.setAttribute('class', 'page-link');
+        a.setAttribute('href', 'javascript:passNumPageProduct('+(i+1)+');');
+        a.innerHTML = i + 1;
+        li.appendChild(a);
+        paginationProducts.appendChild(li);
+    }
+    li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', 'javascript:chngPageProduct(">")');
+    a.innerHTML = '>';
+    li.appendChild(a);
+    paginationProducts.appendChild(li);
+    actualizarElemento(paginationProducts.id, paginationProducts);
+}
+
+function passNumPageProduct(numPage){
+    numPgProducts = numPage;
+    crearTablaProducts(listaProducts);
+}
+
+function chngPageProduct(change){
+    if (change == '<'){
+        if (numPgProducts > 1){
+            numPgProducts--;
+            crearTablaProducts(listaProducts);
+        }
+    }else{
+        if (numPgProducts < Math.ceil(listaProducts.length/10)){
+            numPgProducts++;
+            crearTablaProducts(listaProducts);
+        }
+    }
 }

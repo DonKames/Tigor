@@ -1,3 +1,6 @@
+let listaQuotes;
+let numPgQuotes = 1;
+
 function goPDF(){
     let cantprods = document.getElementById('tBodyProdsCotizacion').childElementCount;
     console.log(cantprods);
@@ -53,8 +56,10 @@ function getCotizaciones() {
         btnForm: 'readCotizaciones'
     };
     axios.get('php/CrudCotizacion.php', { params: data }).then((response) => {
-        crearTablaCotizaciones(response.data);
-        console.log(response.data)
+        listaQuotes = response.data;
+        crearTablaCotizaciones(listaQuotes);
+        createPaginationQuotes(listaQuotes);
+        console.log(listaQuotes)
     })
 }
 
@@ -93,7 +98,13 @@ function crearTablaCotizaciones(listaCotizaciones) {
     let email;
     let botones;
     let cotizacion;
-    for (i = 0; i < listaCotizaciones.length; i++) {
+    let cantPgs = Math.ceil(listaCotizaciones.length / 10);
+    let iMax = numPgQuotes * 10;
+    let iStart = iMax - 10;
+    if(cantPgs == numPgQuotes){
+        iMax = listaCotizaciones.length;
+    }
+    for (let i = iStart; i < iMax; i++) {
         cotizacion = listaCotizaciones[i];
         fila = document.createElement('tr');
         hFila = document.createElement('th');
@@ -243,4 +254,59 @@ function rellenarCotizacion(cotizacion) {
     email.setAttribute('value', cotizacion.email);
     //telefono.value = cotizacion.telefono;
     telefono.setAttribute('value', cotizacion.telefono);
+}
+
+function createPaginationQuotes(listaQuotes){
+    const paginationQuotes = document.createElement('ul');
+    paginationQuotes.id = 'paginationQuotes';
+    paginationQuotes.setAttribute('class', 'pagination justify-content-center');
+    const qtyItemsPage = 10;
+    let qtyPages = Math.ceil(listaQuotes.length/qtyItemsPage);
+    console.log(qtyPages);
+    let li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    let a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', 'javascript:chngPageQuote("<")');
+    a.innerHTML = '<';
+    li.appendChild(a);
+    paginationQuotes.appendChild(li);
+    for (let i = 0; i < qtyPages; i++) {
+        let li = document.createElement('li');
+        li.setAttribute('class', 'page-item');
+        let a = document.createElement('a');
+        a.setAttribute('class', 'page-link');
+        a.setAttribute('href', 'javascript:passNumPageQuote('+(i+1)+');');
+        a.innerHTML = i + 1;
+        li.appendChild(a);
+        paginationQuotes.appendChild(li);
+    }
+    li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', 'javascript:chngPageQuote(">")');
+    a.innerHTML = '>';
+    li.appendChild(a);
+    paginationQuotes.appendChild(li);
+    actualizarElemento(paginationQuotes.id, paginationQuotes);
+}
+
+function passNumPageQuote(numPage){
+    numPgQuotes = numPage;
+    crearTablaCotizaciones(listaQuotes);
+}
+
+function chngPageQuote(change){
+    if (change == '<'){
+        if (numPgQuotes > 1){
+            numPgQuotes--;
+            crearTablaCotizaciones(listaQuotes);
+        }
+    }else{
+        if (numPgQuotes < Math.ceil(listaQuotes.length/10)){
+            numPgQuotes++;
+            crearTablaCotizaciones(listaQuotes);
+        }
+    }
 }

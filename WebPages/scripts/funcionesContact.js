@@ -1,3 +1,6 @@
+let listaContacts;
+let numPgContacts = 1;
+
 function postContact() {
     let name = document.getElementById("contactName").value;
     let email = document.getElementById("contactEmail").value;
@@ -28,7 +31,9 @@ function getContacts() {
         btnForm: 'readContacts'
     };
     axios.get('php/CrudContact.php', { params: data }).then((response) => {
-        crearTablaContacts(response.data);
+        listaContacts = response.data;
+        crearTablaContacts(listaContacts);
+        createPaginationContacts(listaContacts);
         console.log(response.data)
     })
 }
@@ -43,7 +48,13 @@ function crearTablaContacts(listaContacts) {
     let telefono;
     let botones;
     let contact;
-    for (i = 0; i < listaContacts.length; i++) {
+    let cantPgs = Math.ceil(listaContacts.length / 10);
+    let iMax = numPgContacts * 10;
+    let iStart = iMax - 10;
+    if(cantPgs == numPgContacts){
+        iMax = listaContacts.length;
+    }
+    for (let i = iStart; i < iMax; i++) {
         contact = listaContacts[i];
         fila = document.createElement('tr');
         hFila = document.createElement('th');
@@ -88,4 +99,59 @@ function renderResponderContact(id){
         document.getElementById('nameMsgContact').innerHTML = "Mensaje de: " + response.data.name;
         document.getElementById('messageMsgContact').innerHTML = "Mensaje: " + response.data.message;
     });
+}
+
+function createPaginationContacts(listaContacts){
+    const paginationContacts = document.createElement('ul');
+    paginationContacts.id = 'paginationContacts';
+    paginationContacts.setAttribute('class', 'pagination justify-content-center');
+    const qtyItemsPage = 10;
+    let qtyPages = Math.ceil(listaContacts.length/qtyItemsPage);
+    console.log(qtyPages);
+    let li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    let a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', 'javascript:chngPageContact("<")');
+    a.innerHTML = '<';
+    li.appendChild(a);
+    paginationContacts.appendChild(li);
+    for (let i = 0; i < qtyPages; i++) {
+        let li = document.createElement('li');
+        li.setAttribute('class', 'page-item');
+        let a = document.createElement('a');
+        a.setAttribute('class', 'page-link');
+        a.setAttribute('href', 'javascript:passNumPageContact('+(i+1)+');');
+        a.innerHTML = i + 1;
+        li.appendChild(a);
+        paginationContacts.appendChild(li);
+    }
+    li = document.createElement('li');
+    li.setAttribute('class', 'page-item');
+    a = document.createElement('a');
+    a.setAttribute('class', 'page-link');
+    a.setAttribute('href', 'javascript:chngPageContact(">")');
+    a.innerHTML = '>';
+    li.appendChild(a);
+    paginationContacts.appendChild(li);
+    actualizarElemento(paginationContacts.id, paginationContacts);
+}
+
+function passNumPageContact(numPage){
+    numPgContacts = numPage;
+    crearTablaContacts(listaContacts);
+}
+
+function chngPageContact(change){
+    if (change == '<'){
+        if (numPgContacts > 1){
+            numPgContacts--;
+            crearTablaContacts(listaContacts);
+        }
+    }else{
+        if (numPgContacts < Math.ceil(listaContacts.length/10)){
+            numPgContacts++;
+            crearTablaContacts(listaContacts);
+        }
+    }
 }

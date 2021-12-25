@@ -13,8 +13,13 @@ function crearTablaClientes(listaClientes) {
     let mail;
     let telefono;
     let cliente;
-
-    for (i = 0; i < listaClientes.length; i++) {
+    let cantPgs = Math.ceil(listaClientes.length / 10);
+    let iMax = numPgClients * 10;
+    let iStart = iMax - 10;
+    if(cantPgs == numPgClients){
+        iMax = listaClientes.length;
+    }
+    for (let i = iStart; i < iMax; i++) {
         cliente = listaClientes[i];
         fila = document.createElement('tr');
         hFila = document.createElement('th');
@@ -45,7 +50,6 @@ function crearTablaClientes(listaClientes) {
         fila.appendChild(botones);
         tabla.appendChild(fila);
         tabla.id = "cuerpoTablaMostrarClientes";
-
     }
     actualizarElemento(tabla.id, tabla);
 }
@@ -98,35 +102,57 @@ function postClient() {
 }
 
 function createPaginationClients(listaClients){
-    const paginationClients = document.getElementById('paginationClientes');
+    //const paginationClients = document.getElementById('paginationClients');
+    const paginationClients = document.createElement('ul');
+    paginationClients.id = 'paginationClients';
+    paginationClients.setAttribute('class', 'pagination justify-content-center');
     const qtyItemsPage = 10;
     let qtyPages = Math.ceil(listaClients.length/qtyItemsPage);
-    let pagination = document.getElementById('paginationClients');
     console.log(qtyPages);
     let li = document.createElement('li');
     li.setAttribute('class', 'page-item');
     let a = document.createElement('a');
     a.setAttribute('class', 'page-link');
-    a.setAttribute('href', '#');
+    a.setAttribute('href', 'javascript:chngPageClient("<")');
     a.innerHTML = '<';
     li.appendChild(a);
-    pagination.appendChild(li);
+    paginationClients.appendChild(li);
     for (let i = 0; i < qtyPages; i++) {
         let li = document.createElement('li');
         li.setAttribute('class', 'page-item');
         let a = document.createElement('a');
         a.setAttribute('class', 'page-link');
-        a.setAttribute('href', '#');
+        a.setAttribute('href', 'javascript:passNumPageClient('+(i+1)+');');
         a.innerHTML = i + 1;
         li.appendChild(a);
-        pagination.appendChild(li);
+        paginationClients.appendChild(li);
     }
     li = document.createElement('li');
     li.setAttribute('class', 'page-item');
     a = document.createElement('a');
     a.setAttribute('class', 'page-link');
-    a.setAttribute('href', '#');
+    a.setAttribute('href', 'javascript:chngPageClient(">")');
     a.innerHTML = '>';
     li.appendChild(a);
-    pagination.appendChild(li);
+    paginationClients.appendChild(li);
+    actualizarElemento(paginationClients.id, paginationClients);
+}
+
+function passNumPageClient(numPage){
+    numPgClients = numPage;
+    crearTablaClientes(listaClients);
+}
+
+function chngPageClient(change){
+    if (change == '<'){
+        if (numPgClients > 1){
+            numPgClients--;
+            crearTablaClientes(listaClients);
+        }
+    }else{
+        if (numPgClients < Math.ceil(listaClients.length/10)){
+            numPgClients++;
+            crearTablaClientes(listaClients);
+        }
+    }
 }
